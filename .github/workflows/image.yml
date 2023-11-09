@@ -39,6 +39,8 @@ jobs:
       with:
         platforms: linux/amd64 # linux/arm64 makes it take longer
         push: true
+        repo: demo
+        registry: arn:aws:ecr:us-west-2:813590939111:repository
         build-args: >
           foo=bar
           ice_cream=chocolate
