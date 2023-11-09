@@ -38,7 +38,7 @@ jobs:
       uses: duplocloud/actions/build-image@main
       with:
         platforms: linux/amd64 # linux/arm64 makes it take longer
-        push: false
+        push: true
         build-args: >
           foo=bar
           ice_cream=chocolate

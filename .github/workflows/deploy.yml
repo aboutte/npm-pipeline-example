@@ -44,5 +44,5 @@ jobs:
     - name: Update Service
       uses: duplocloud/actions/update-service@main
       with:
-        service: my-service
+        service: demo
         image: ${{ inputs.image }}
