@@ -7,7 +7,7 @@ describe('Test the root path', () => {
   });
   test('It should respond with "Hello, world!"', async () => {
     const response = await request(app).get('/');
-    expect(response.text).toEqual('Hello, world!');
+    expect(response.text).toEqual('Hello, world! this is a demo');
     expect(response.status).toBe(200);
   });
 });
