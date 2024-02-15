@@ -39,6 +39,7 @@ jobs:
       with:
         platforms: linux/amd64
         push: true
-        registry: "813590939111.dkr.ecr.us-west-2.amazonaws.com/frontend"
+        registry: "813590939111.dkr.ecr.us-west-2.amazonaws.com"
+        repo: "frontend"
         build-args: >
           name=${{ github.repository }}
