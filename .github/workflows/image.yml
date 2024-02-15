@@ -16,7 +16,7 @@ env:
   DUPLO_TENANT: ${{ vars.DUPLO_TENANT }}
   DUPLO_TOKEN: ${{ secrets.DUPLO_TOKEN }}
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
 jobs:
   build_image:
     name: Build and Push Image
