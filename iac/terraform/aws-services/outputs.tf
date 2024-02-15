@@ -17,3 +17,10 @@ output "ecr_repository_url" {
   value       = duplocloud_aws_ecr_repository.frontend.repository_url
   description = "The URL of the frontend ECR repository"
 }
+
+
+output "db_password" {
+  value       = random_password.password.result
+  description = "password for the database"
+  sensitive = true
+}

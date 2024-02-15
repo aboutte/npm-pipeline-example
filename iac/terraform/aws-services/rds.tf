@@ -6,7 +6,7 @@ resource "random_password" "password" {
 
 resource "duplocloud_rds_instance" "db" {
   tenant_id      = local.tenant_id
-  name           = "${local.tenant_id}-app"
+  name           = "${local.tenant_name}-app"
   engine         = 0                          
   engine_version = "8.0.32"
   size           = "db.t3.medium"
@@ -16,3 +16,5 @@ resource "duplocloud_rds_instance" "db" {
 
   encrypt_storage = true
 }
+
+
