@@ -20,7 +20,6 @@ locals {
   region         = data.duplocloud_tenant_aws_region.current.aws_region
   tenant_id      = data.terraform_remote_state.tenant.outputs["tenant_id"] 
   tenant_name    = data.terraform_remote_state.tenant.outputs["tenant_name"]
-  plan_id  = 
 }
 
 data "terraform_remote_state" "tenant" {
