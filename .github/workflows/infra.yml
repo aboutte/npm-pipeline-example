@@ -75,7 +75,7 @@ jobs:
     - name: TF Validate Module
       uses: duplocloud/actions/terraform-module@main
       with:
-        module: modules/foundation
+        module: iac/${{ inputs.module }}
         test: false
 
     - name: TF Execute Module
