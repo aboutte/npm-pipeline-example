@@ -7,11 +7,14 @@ const db_url = process.env.DB_URL
 const db_username = process.env.DB_USERNAME
 const db_password = process.env.DB_PASSWORD
 
+const contents = `
+DB URL: ${db_url}
+DB username: ${db_username}
+DB password: ${db_password}
+`;
+
 app.get('/', (req, res) => {
-  res.send('Hello, world!');
-  res.send(`DB URL: ${db_url}`);
-  res.send(`DB username: ${db_username}`);
-  res.send(`DB password: ${db_password}`);
+  res.send(contents);
 });
 
 export const server = app.listen(port, () => {
