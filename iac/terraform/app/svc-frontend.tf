@@ -5,7 +5,6 @@ resource "duplocloud_duplo_service" "frontend" {
   replicas                             = var.replica_count
   lb_synced_deployment                 = false
   cloud_creds_from_k8s_service_account = false
-  http_to_https_redirect = true
   is_daemonset                         = false
   is_unique_k8s_node_required = true
   agent_platform                       = 7
@@ -25,6 +24,16 @@ resource "duplocloud_duplo_service" "frontend" {
       docker_image
     ]
   }
+}
+
+resource "duplocloud_duplo_service_params" "myservice" {
+  tenant_id = local.tenant_id
+
+  replication_controller_name = duplocloud_duplo_service_lbconfigs.frontend_config.replication_controller_name
+  dns_prfx                    = terraform.workspace
+  drop_invalid_headers        = true
+  enable_access_logs          = true
+  http_to_https_redirect      = true
 }
 
 
