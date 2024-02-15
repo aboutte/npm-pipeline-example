@@ -1,4 +1,4 @@
-name: SetUp the sales demo
+name: Inra Pipelines
 
 on:
   workflow_dispatch:
@@ -22,7 +22,7 @@ on:
       workspace:
         description: Workspace to run
         type: string
-        default: default
+        default: app01
       
   workflow_call:
     inputs:
@@ -37,7 +37,7 @@ on:
       workspace:
         description: Workspace to run
         type: string
-        default: default
+        default: app01
     secrets:
       DUPLO_TOKEN:
         description: Duplo Token
