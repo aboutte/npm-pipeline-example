@@ -1,6 +1,6 @@
 
 variable "svc_frontend_docker_image" {
-  default = "813590939111.dkr.ecr.us-west-2.amazonaws.com/frontend:latest"
+  default = "813590939111.dkr.ecr.us-west-2.amazonaws.com/frontend:main"
   type    = string
 }
 

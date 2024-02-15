@@ -26,19 +26,19 @@ resource "duplocloud_duplo_service" "frontend" {
   }
 }
 
-# resource "duplocloud_duplo_service_lbconfigs" "frontend_config" {
-#   tenant_id                   = duplocloud_duplo_service.frontend.tenant_id
-#   replication_controller_name = duplocloud_duplo_service.frontend.name
-#   lbconfigs {
-#     lb_type          = 7
-#     is_native        = false
-#     is_internal      = false
-#     port             = 3000
-#     external_port    = 443
-#     protocol         = "http"
-#     health_check_url = "/"
-#   }
-# }
+resource "duplocloud_duplo_service_lbconfigs" "frontend_config" {
+  tenant_id                   = duplocloud_duplo_service.frontend.tenant_id
+  replication_controller_name = duplocloud_duplo_service.frontend.name
+  lbconfigs {
+    lb_type          = 1
+    is_native        = false
+    is_internal      = false
+    port             = 3000
+    external_port    = 443
+    protocol         = "http"
+    health_check_url = "/"
+  }
+}
 
 
 resource "duplocloud_k8_config_map" "frontend" {
