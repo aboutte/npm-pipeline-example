@@ -10,11 +10,6 @@ variable "replica_count" {
   default = 1
 }
 
-# TODO: this is kind of a hack.  I updated the apply.sh wrapper script to generate this value using TF_VAR_tenant
-variable "tenant" {
-  type = string
-}
-
 variable "base_domain" {
   default = "salesdemo-apps.duplocloud.net."
   type    = string
