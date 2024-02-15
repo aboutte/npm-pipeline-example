@@ -67,6 +67,7 @@ jobs:
       with:
         module: iac/terraform/${{ inputs.module }}
         test: false
+        fmt: false
 
     - name: TF Execute Module
       uses: duplocloud/actions/terraform-exec@main
