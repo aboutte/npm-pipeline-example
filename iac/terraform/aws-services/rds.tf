@@ -11,10 +11,8 @@ resource "duplocloud_rds_instance" "db" {
   engine_version = "8.0.32"
   size           = "db.t3.medium"
 
-  master_username = "appadmin"
+  master_username = var.db_username
   master_password = random_password.password.result
 
   encrypt_storage = true
 }
-
-

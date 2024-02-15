@@ -4,8 +4,8 @@ resource "duplocloud_k8_secret" "secret" {
   secret_name = "database"
   secret_type = "Opaque"
   secret_data = jsonencode({
-    "db_url" : "bar"
-    "db_username" : local.db_password
+    "db_url" : local.db_url
+    "db_username" : local.db_username
     "db_password" : local.db_password
     }
   )

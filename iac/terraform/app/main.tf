@@ -21,6 +21,8 @@ locals {
   tenant_id      = data.terraform_remote_state.tenant.outputs["tenant_id"] 
   tenant_name    = data.terraform_remote_state.tenant.outputs["tenant_name"]
   db_password    = data.terraform_remote_state.aws-services.outputs["db_password"]
+  db_username    = data.terraform_remote_state.aws-services.outputs["db_username"]
+  db_url    = data.terraform_remote_state.aws-services.outputs["db_url"]
 }
 
 data "terraform_remote_state" "tenant" {

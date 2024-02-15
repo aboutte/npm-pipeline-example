@@ -24,3 +24,8 @@ output "db_password" {
   description = "password for the database"
   sensitive = true
 }
+
+output "db_username" {
+  value       = var.db_username
+  description = "username for the database"
+}

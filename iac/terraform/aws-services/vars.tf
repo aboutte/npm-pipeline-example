@@ -33,3 +33,8 @@ variable "az_list" {
   type        = list(string)
   description = "The letter at the end of the zone"
 }
+
+variable "db_username" {
+  default = "appadmin"
+  type    = string
+}

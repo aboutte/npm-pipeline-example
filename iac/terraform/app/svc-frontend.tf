@@ -12,6 +12,33 @@ resource "duplocloud_duplo_service" "frontend" {
   other_docker_config = jsonencode({
     "Env" : [
       {
+        "name" : "DB_URL",
+        "valueFrom" : {
+          "secretKeyRef" : {
+            "key" : "db_url",
+            "name" : "database"
+          }
+        }
+      },
+      {
+        "name" : "db_username",
+        "valueFrom" : {
+          "secretKeyRef" : {
+            "key" : "db_username",
+            "name" : "database"
+          }
+        }
+      },
+      {
+        "name" : "db_password",
+        "valueFrom" : {
+          "secretKeyRef" : {
+            "key" : "db_password",
+            "name" : "database"
+          }
+        }
+      },
+      {
         "Name" : "DUPLO",
         "Value" : "true"
       }
