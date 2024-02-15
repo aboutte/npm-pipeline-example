@@ -13,15 +13,15 @@ on:
         description: The full image
         required: true
         type: string
+      workspace:
+        description: Workspace to run
+        type: string
+        default: app01
     secrets:
       DUPLO_TOKEN:
         description: The Duplo API token
         required: true
-    workspace:
-      inputs:
-        description: Workspace to run
-        type: string
-        default: app01
+
 
 jobs:
   update_service:
