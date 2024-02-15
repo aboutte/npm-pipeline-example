@@ -39,13 +39,4 @@ data "duplocloud_tenant" "tenant" {
   name = local.tenant_id
 }
 
-data "duplocloud_tenant_aws_credentials" "test" { tenant_id = data.duplocloud_tenant.tenant.id }
 
-data "duplocloud_admin_aws_credentials" "this" {}
-
-provider "aws" {
-  access_key = data.duplocloud_admin_aws_credentials.this.access_key_id
-  secret_key = data.duplocloud_admin_aws_credentials.this.secret_access_key
-  token      = data.duplocloud_admin_aws_credentials.this.session_token
-  region     = "us-west-2"
-}
