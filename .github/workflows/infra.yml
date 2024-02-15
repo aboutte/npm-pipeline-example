@@ -6,7 +6,7 @@ on:
       module:
         description: Module to run
         type: choice
-        default: foundation
+        default: admin-tenant
         options:
         - admin-tenant
         - aws-services
@@ -52,7 +52,7 @@ on:
         required: true
 jobs:
   module:
-    name: ${{ inputs.cmd }} ${{ inputs.workspace }} foundation
+    name: ${{ inputs.cmd }} ${{ inputs.workspace }} ${{ inputs.module }}
     runs-on: ubuntu-latest
     environment: 
       name: ${{ inputs.environment }}
