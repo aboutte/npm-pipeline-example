@@ -39,3 +39,12 @@ resource "duplocloud_duplo_service" "frontend" {
 #     health_check_url = "/"
 #   }
 # }
+
+
+resource "duplocloud_k8_config_map" "frontend" {
+  tenant_id = local.tenant_id
+
+  name = "frontend"
+
+  data = jsonencode({ foo = "bar2" })
+}
