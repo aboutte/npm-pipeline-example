@@ -1,4 +1,4 @@
-name: Inra Pipelines
+name: Infra Pipelines
 
 on:
   workflow_dispatch:

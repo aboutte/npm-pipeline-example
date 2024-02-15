@@ -17,6 +17,11 @@ on:
       DUPLO_TOKEN:
         description: The Duplo API token
         required: true
+    workspace:
+      inputs:
+        description: Workspace to run
+        type: string
+        default: app01
 
 jobs:
   update_service:
@@ -25,7 +30,7 @@ jobs:
     env:
       DUPLO_TOKEN: ${{ secrets.DUPLO_TOKEN }}
       DUPLO_HOST: ${{ vars.DUPLO_HOST  }}
-      DUPLO_TENANT: ${{ vars.DUPLO_TENANT }}
+      DUPLO_TENANT: ${{ inputs.workspace }}
     steps: 
     - name: Duplo Setup
       uses: duplocloud/actions/setup@main
