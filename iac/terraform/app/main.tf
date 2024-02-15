@@ -39,7 +39,7 @@ data "terraform_remote_state" "aws-services" {
 }
 
 data "duplocloud_tenant" "tenant" {
-  name = var.tenant
+  name = local.tenant_id
 }
 
 data "duplocloud_tenant_aws_credentials" "test" { tenant_id = data.duplocloud_tenant.tenant.id }
