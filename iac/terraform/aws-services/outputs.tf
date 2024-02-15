@@ -29,3 +29,9 @@ output "db_username" {
   value       = var.db_username
   description = "username for the database"
 }
+
+output "db_url" {
+  value       = duplocloud_rds_instance.db.host
+  description = "url for the database"
+}
+

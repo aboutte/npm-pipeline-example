@@ -16,3 +16,4 @@ resource "duplocloud_rds_instance" "db" {
 
   encrypt_storage = true
 }
+
