@@ -12,3 +12,8 @@ output "region" {
   value       = local.region
   description = "The AWS Region for the Tenant"
 }
+
+output "ecr_repository_url" {
+  value       = duplocloud_aws_ecr_repository.frontend.repository_url
+  description = "The URL of the frontend ECR repository"
+}

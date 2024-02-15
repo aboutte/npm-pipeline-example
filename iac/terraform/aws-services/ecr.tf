@@ -1,5 +1,5 @@
 
-resource "duplocloud_aws_ecr_repository" "test-ecr" {
+resource "duplocloud_aws_ecr_repository" "frontend" {
   tenant_id                 = local.tenant_id
   name                      = "frontend"
   enable_scan_image_on_push = true
