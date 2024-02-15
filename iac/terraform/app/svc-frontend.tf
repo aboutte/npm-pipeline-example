@@ -45,43 +45,6 @@ resource "duplocloud_duplo_service_lbconfigs" "frontend_config" {
   }
 }
 
-resource "duplocloud_aws_target_group_attributes" "askduplo_dev_listener_443_tg_attributes" {
-  tenant_id        = local.tenant_id
-  target_group_arn = duplocloud_aws_load_balancer_listener.askduplo_dev_listener_443.target_group_arn
-  attribute {
-    key   = "target_group_health.unhealthy_state_routing.minimum_healthy_targets.count"
-    value = "1"
-  }
-
-
-
-
-  attribute {
-    key   = "stickiness.lb_cookie.duration_seconds"
-    value = "86400"
-  }
-  attribute {
-    key   = "slow_start.duration_seconds"
-    value = "0"
-  }
-  attribute {
-    key   = "stickiness.app_cookie.duration_seconds"
-    value = "86400"
-  }
-  attribute {
-    key   = "target_group_health.dns_failover.minimum_healthy_targets.percentage"
-    value = "off"
-  }
-  attribute {
-    key   = "load_balancing.cross_zone.enabled"
-    value = "use_load_balancer_configuration"
-  }
-  attribute {
-    key   = "load_balancing.algorithm.type"
-    value = "round_robin"
-  }
-}
-
 
 resource "duplocloud_k8_config_map" "frontend" {
   tenant_id = local.tenant_id
