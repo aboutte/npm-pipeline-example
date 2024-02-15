@@ -6,7 +6,7 @@ data "duplocloud_tenant_aws_region" "current" {
 }
 
 data "duplocloud_plan_certificate" "cert" {
-  name = var.base_domain
+  name = "wildcard-default"
   plan_id = data.duplocloud_tenant.tenant.plan_id
 }
 
