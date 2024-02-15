@@ -11,9 +11,6 @@ locals {
   tenant_id      = data.terraform_remote_state.tenant.outputs["tenant_id"]
   cert_arn       = data.terraform_remote_state.tenant.outputs["cert_arn"]
   tenant_name    = data.terraform_remote_state.tenant.outputs["tenant_name"]
-  sqs_queue_url = data.terraform_remote_state.aws-services.outputs["sqs_queue_url"]
-  sqs_queue_fullname = data.terraform_remote_state.aws-services.outputs["sqs_queue_fullname"]
-  sqs_queue_arn = data.terraform_remote_state.aws-services.outputs["sqs_queue_arn"]
 }
 
 data "terraform_remote_state" "tenant" {
