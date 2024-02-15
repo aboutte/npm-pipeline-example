@@ -7,6 +7,11 @@ on:
         description: The full image
         type: string
         required: true
+      workspace:
+        description: Workspace to run
+        type: string
+        required: true
+        default: app01
   workflow_call:
     inputs:
       image:
@@ -16,6 +21,7 @@ on:
       workspace:
         description: Workspace to run
         type: string
+        required: true
         default: app01
     secrets:
       DUPLO_TOKEN:
