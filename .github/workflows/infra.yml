@@ -19,10 +19,6 @@ on:
         - plan
         - apply
         - destroy
-      environment:
-        description: Environment to deploy to
-        type: environment
-        default: salesdemo
       workspace:
         description: Workspace to run
         type: string
@@ -34,10 +30,6 @@ on:
         description: Command to run
         type: string
         default: plan
-      environment:
-        description: Environment to deploy to
-        type: string
-        default: dev
       module:
         description: Module to run
         type: string
@@ -54,8 +46,6 @@ jobs:
   module:
     name: ${{ inputs.cmd }} ${{ inputs.workspace }} ${{ inputs.module }}
     runs-on: ubuntu-latest
-    environment: 
-      name: ${{ inputs.environment }}
     env:
       DUPLO_TOKEN: ${{ secrets.DUPLO_TOKEN }}
       DUPLO_HOST: ${{ vars.DUPLO_HOST }}
@@ -75,7 +65,7 @@ jobs:
     - name: TF Validate Module
       uses: duplocloud/actions/terraform-module@main
       with:
-        module: iac/${{ inputs.module }}
+        module: iac/admin-tenant
         test: false
 
     - name: TF Execute Module
