@@ -1,0 +1,37 @@
+name: Test
+run-name: Testing Project
+on: 
+  workflow_dispatch: {}
+  workflow_call: {}
+jobs:
+  build_test:
+    name: Code Review
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 19
+        cache: npm
+    
+    - name: Install
+      run: npm ci
+
+    - name: Audit Installation
+      run: npm audit
+
+    - name: Build Project
+      run: npm run build:ci
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: build
+        path: ./dist/
+
+    - name: Test
+      run: npm test
