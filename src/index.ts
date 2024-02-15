@@ -8,8 +8,8 @@ const db_username = process.env.DB_USERNAME
 const db_password = process.env.DB_PASSWORD
 
 const contents = `
-DB URL: ${db_url}
-DB username: ${db_username}
+DB URL: ${db_url} \n
+DB username: ${db_username} \n
 DB password: ${db_password}
 `;
 
