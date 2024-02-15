@@ -1,21 +1,12 @@
 name: Check Main
 
 on:
-  push:
-    branches:
-    - main
-    tags:
-    - v*
+  workflow_dispatch: {}
 
 jobs:
 
-  test:
-    name: Main
-    uses: ./.github/workflows/test.yml
-
   image:
     name: Main
-    needs: test
     secrets: inherit
     uses: ./.github/workflows/image.yml
 

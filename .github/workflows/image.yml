@@ -37,7 +37,8 @@ jobs:
       id: build_image
       uses: duplocloud/actions/build-image@main
       with:
-        platforms: linux/amd64 # linux/arm64 makes it take longer
-        push: false
+        platforms: linux/amd64
+        push: true
+        registry: "813590939111.dkr.ecr.us-west-2.amazonaws.com/frontend"
         build-args: >
           name=${{ github.repository }}
