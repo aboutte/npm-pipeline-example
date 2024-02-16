@@ -25,28 +25,28 @@ resource "duplocloud_k8s_cron_job" "queue" {
 
 
               env {
-                name  = "DATABASE_URL"
+                name  = "DB_URL"
                 value_from {
                     secret_key_ref {
-                        key = "DATABASE_URL"
+                        key = "DB_URL"
                         name = "database"
                     }
                 }
               }
               env {
-                name  = "DATABASE_USERNAME"
+                name  = "DB_USERNAME"
                 value_from {
                     secret_key_ref {
-                        key = "DATABASE_USERNAME"
+                        key = "DB_USERNAME"
                         name = "database"
                     }
                 }
               }
               env {
-                name  = "DATABASE_PASSWORD"
+                name  = "DB_PASSWORD"
                 value_from {
                     secret_key_ref {
-                        key = "DATABASE_PASSWORD"
+                        key = "DB_PASSWORD"
                         name = "database"
                     }
                 }
