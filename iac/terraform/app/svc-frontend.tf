@@ -25,11 +25,6 @@ resource "duplocloud_duplo_service" "frontend" {
           }
         ]
       "VolumesMounts" : [
-        {
-          "Name" : "databasevolume",
-          "MountPath" : "/mnt/fulljsonsecret",
-          "readOnly" : true
-        },
 
         # This is the mount for the env var example.  Note that you MUST do the mount 
         # before you can use the secret as an env var.
