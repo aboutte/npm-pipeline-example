@@ -22,6 +22,6 @@ variable "integration_api_key" {
 }
 
 variable "queue_schedule" {
-  default = "*/5 * * * *"
+  default = "0 * * * *"
   type    = string
 }
