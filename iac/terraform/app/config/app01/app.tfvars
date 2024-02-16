@@ -1,1 +1,1 @@
-replica_count = 2
+replica_count = 1
