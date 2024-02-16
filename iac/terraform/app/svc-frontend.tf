@@ -15,7 +15,7 @@ resource "duplocloud_duplo_service" "frontend" {
         "name" : "DB_URL",
         "valueFrom" : {
           "secretKeyRef" : {
-            "key" : "db_url",
+            "key" : "DB_URL",
             "name" : "database"
           }
         }
@@ -24,7 +24,7 @@ resource "duplocloud_duplo_service" "frontend" {
         "name" : "DB_USERNAME",
         "valueFrom" : {
           "secretKeyRef" : {
-            "key" : "db_username",
+            "key" : "DB_USERNAME",
             "name" : "database"
           }
         }
@@ -33,7 +33,7 @@ resource "duplocloud_duplo_service" "frontend" {
         "name" : "DB_PASSWORD",
         "valueFrom" : {
           "secretKeyRef" : {
-            "key" : "db_password",
+            "key" : "DB_PASSWORD",
             "name" : "database"
           }
         }
