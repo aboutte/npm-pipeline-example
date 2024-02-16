@@ -1,29 +1,51 @@
-# Pipeline Example  
+AWS Reference Architecture Project
+Overview
+Brief description of the project, including its purpose and goals. Explain what problem the reference architecture solves and who it is intended for.
 
-Here we have a quick example of a simple project and a pipeline using the Duplo ci/cd piepline tools. 
+Table of Contents
+Overview
+Architecture Diagram
+Components
+Deployment
+Configuration
+Testing
+Usage
+Contributing
+License
+Architecture Diagram
+Include a visual representation of the architecture using diagrams or charts. This helps users understand the different components and how they interact.
 
-## Dev Containers  
+Components
+Explain each component of the architecture, including its purpose, functionality, and how it fits into the overall solution. List any AWS services or resources used.
 
-The dev container is tuned to use openvpn so private Duplo resources are available. You will need the following secrets in this repos secrets store:
+Deployment
+Provide instructions for deploying the reference architecture on AWS. Include any prerequisites, such as AWS account setup, IAM roles, or VPC configuration.
 
-### OpenVPN 
+Configuration
+Explain any configuration options or parameters that can be customized. Provide guidance on how to modify the architecture to fit specific use cases or requirements.
 
-Set both of these secrets in the secrets for codespaces section in the repo settings. 
+Testing
+Describe the testing strategy for the reference architecture. Include information on how to run tests, what tests are included, and how to interpret the results.
 
-[Github Codespace Secrets Instructions](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-encrypted-secrets-for-your-codespaces)
+Usage
+Provide examples or use cases demonstrating how to use the reference architecture in real-world scenarios. Include code snippets, CLI commands, or API calls as needed.
 
-Secret: `OPENVPN_CONFIG`  
-The openvpn config file from your duplo user.
+Contributing
+Explain how others can contribute to the project. This may include guidelines for submitting bug reports, feature requests, or pull requests.
 
-[OpenVPN Instructions on Duplo](https://docs.duplocloud.com/docs/gcp/prerequisites/connect-to-the-vpn)
+License
+Specify the license under which the project is distributed. Include any terms and conditions for use, modification, and distribution of the code.
 
-Secret: `OPENVPN_AUTH`  
-The openvpn auth file with username on first line and password on second line.
+Additional Resources
+Provide links to any additional documentation, tutorials, or resources that may be helpful for understanding or using the reference architecture.
 
-Example:
-```
-you@example.duplocloud.net
-Password123
-```
+Support
+Offer information on where users can get help or support if they encounter issues or have questions about the project.
 
-this is a test commit
+Acknowledgments
+Recognize any individuals or organizations that contributed to the development of the reference architecture.
+
+Contact
+Provide contact information for the project maintainers or contributors in case users need to reach out for assistance or collaboration.
+
+This outline should provide a comprehensive guide for users to understand, deploy, and utilize your AWS reference architecture project.
