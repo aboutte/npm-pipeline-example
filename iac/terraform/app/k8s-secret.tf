@@ -24,6 +24,17 @@ resource "duplocloud_k8_secret" "integration" {
   )
 }
 
+resource "duplocloud_k8_secret" "database" {
+  tenant_id   = local.tenant_id
+  secret_name = "database"
+  secret_type = "Opaque"
+  secret_data = jsonencode({
+    "DB_URL" : local.db_url
+    "DB_USERNAME" : local.db_username
+    "DB_PASSWORD" : local.db_password
+    })
+}
+
 resource "duplocloud_k8_secret_provider_class" "spc" {
   tenant_id       = local.tenant_id
   name            = "database"
