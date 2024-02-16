@@ -7,6 +7,7 @@ resource "duplocloud_k8s_cron_job" "queue" {
   spec {
     job_template {
       spec {
+        ttl_seconds_after_finished = 900
         template {
           spec {
             restart_policy = "Never"
