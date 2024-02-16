@@ -85,13 +85,10 @@ resource "duplocloud_duplo_service_params" "myservice" {
   http_to_https_redirect      = true
 }
 
-
-
-
 resource "duplocloud_duplo_service_lbconfigs" "frontend_config" {
   tenant_id                   = duplocloud_duplo_service.frontend.tenant_id
   replication_controller_name = duplocloud_duplo_service.frontend.name
-  # certificate_arn = 
+  certificate_arn = data.duplocloud_plan_certificates.certs[0].arn
   lbconfigs {
     lb_type          = 1
     is_native        = false

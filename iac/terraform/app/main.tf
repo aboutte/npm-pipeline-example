@@ -5,15 +5,13 @@ data "duplocloud_tenant_aws_region" "current" {
   tenant_id = local.tenant_id
 }
 
-data "duplocloud_plan_certificate" "cert" {
-  name = "wildcard-default"
+data "duplocloud_plan_certificates" "certs" {
   plan_id = data.duplocloud_tenant.tenant.plan_id
 }
 
 data "duplocloud_tenant" "tenant" {
   name = local.tenant_name
 }
-
 
 locals {
   tfstate_bucket = "duplo-tfstate-${data.aws_caller_identity.current.account_id}"
