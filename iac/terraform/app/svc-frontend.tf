@@ -4,7 +4,7 @@ resource "duplocloud_duplo_service" "frontend" {
   name                                 = "frontend"
   replicas                             = var.replica_count
   lb_synced_deployment                 = false
-  cloud_creds_from_k8s_service_account = false
+  cloud_creds_from_k8s_service_account = true
   is_daemonset                         = false
   is_unique_k8s_node_required = true
   agent_platform                       = 7
@@ -25,23 +25,6 @@ resource "duplocloud_duplo_service" "frontend" {
           }
         ]
       "VolumesMounts" : [
-
-        # This is the mount for the env var example.  Note that you MUST do the mount 
-        # before you can use the secret as an env var.
-        # The mount triggers the CSI driver to create the K8s secret, 
-        # which is then available for use as an env var
-        # In this example we didn't specify an objectAlias for the 
-        # secretProviderClass so the file will be mounted as 
-        # /mnt/fieldsenvvar/duploservices-${tenant_name}-demo-secret"
-        # (the name of the secret).  It will have the full text of the secret in json format
-        # It will also create files based on the jmespath expression we provided. 
-        # They will be named after the objectAlias we provided:
-        # file /mnt/fieldsenvvar/MYFIRSTSECRETENVVAR will have contents S0M3S3cretV@Lue 
-        # and /mnt/fieldsenvvar/MYSECONDENVVAR will have contents An0th3rS3cretV@Lue
-        # We will also get a secret named fields-from-secret-manager with this data (decoded here)
-        #data:
-        #  MYFIRSTSECRETENVVAR: S0M3S3cretV@Lue
-        #  MYSECONDSECRETENVVAR: An0th3rS3cretV@Lue
 
         {
           "Name" : "database",
