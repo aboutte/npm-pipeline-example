@@ -35,7 +35,7 @@ resource "duplocloud_k8_secret" "integration" {
 #     })
 # }
 
-resource "duplocloud_k8_secret_provider_class" "spc" {
+resource "duplocloud_k8_secret_provider_class" "database" {
   tenant_id       = local.tenant_id
   name            = "database"
   secret_provider = "aws"
