@@ -15,7 +15,7 @@ resource "duplocloud_k8s_cron_job" "queue" {
               name              = "scheduler"
               image             = "busybox:latest"
               image_pull_policy = "Always"
-              command = ["/bin/sh", "-c", "date; echo Hello from the Kubernetes cluster; echo the database url is: $DATABASE_URL"]
+              command = ["/bin/sh", "-c", "date; echo Hello from the Kubernetes cluster; echo the database url is: $DB_URL"]
               
 
               env {
