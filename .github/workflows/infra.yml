@@ -80,3 +80,4 @@ jobs:
         module: iac/terraform/${{ inputs.module }}
         workspace: ${{ inputs.workspace }}
         command: ${{ inputs.cmd }}
+        config: iac/terraform/${{ inputs.module }}/config
