@@ -11,17 +11,7 @@ resource "duplocloud_duplo_service" "frontend" {
   cloud                                = 0
   other_docker_config = jsonencode({
   "Volumes" : [
-          {
-            # Define the CSI volume for the secret we're mounting as a raw json file.  
-            "Name" : "database",
-            "Csi" : {
-              "driver" : "secrets-store.csi.k8s.io",
-              "readOnly" : true,
-              "VolumeAttributes" : {
-                "secretProviderClass" : duplocloud_k8_secret_provider_class.database.name
-              }
-            }
-          },
+
 
           # Define the CSI volume for the env var example
           { "Name" : "database",
