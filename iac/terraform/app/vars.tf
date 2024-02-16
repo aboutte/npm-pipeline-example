@@ -15,6 +15,11 @@ variable "base_domain" {
   type    = string
 }
 
+variable "integration_api_key" {
+  default = ""
+  type    = string
+  sensitive = true
+}
 
 variable "queue_schedule" {
   default = "*/5 * * * *"

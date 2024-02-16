@@ -7,6 +7,7 @@ const port = process.env.PORT || 3000;
 const db_url = process.env.DB_URL
 const db_username = process.env.DB_USERNAME
 const db_password = process.env.DB_PASSWORD
+const integration_api_key = process.env.INTEGRATION_API_KEY
 
 var fileContents = ''
 
@@ -33,6 +34,9 @@ app.get('/', (req, res) => {
         <p>DB URL: ${db_url}</p>
         <p>DB username: ${db_username}</p>
         <p>DB password: ${db_password}</p>
+
+        <p>Here are examples of reading environment variables that came from k8s secrets where the value came from GitHub Action Secrets:</p>
+        <p>Integration aPI Key: ${integration_api_key}</p>
 
         <p></p>
         <p>Here are examples of reading from a config map:</p>

@@ -10,3 +10,13 @@ resource "duplocloud_k8_secret" "secret" {
     }
   )
 }
+
+resource "duplocloud_k8_secret" "integration" {
+  tenant_id   = local.tenant_id
+  secret_name = "integration"
+  secret_type = "Opaque"
+  secret_data = jsonencode({
+    "integration_api_key" : var.integration_api_key
+    }
+  )
+}

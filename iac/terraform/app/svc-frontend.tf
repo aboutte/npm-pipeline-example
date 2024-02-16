@@ -39,6 +39,15 @@ resource "duplocloud_duplo_service" "frontend" {
         }
       },
       {
+        "name" : "INTEGRATION_API_KEY",
+        "valueFrom" : {
+          "secretKeyRef" : {
+            "key" : "integration_api_key",
+            "name" : "integration"
+          }
+        }
+      },
+      {
         "Name" : "DUPLO",
         "Value" : "true"
       }
