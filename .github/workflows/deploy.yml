@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DUPLO_TOKEN: ${{ secrets.DUPLO_TOKEN }}
-      DUPLO_HOST: ${{ vars.DUPLO_HOST  }}
+      DUPLO_HOST: ${{ secrets.DUPLO_HOST  }}
       DUPLO_TENANT: ${{ inputs.workspace }}
     steps: 
     - name: Duplo Setup
