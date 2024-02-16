@@ -6,15 +6,13 @@ resource "duplocloud_aws_lambda_function" "app" {
   description = "Sample function that shows using AWS Secrets Manager"
 
   package_type = "Image"
-  image_uri    = "813590939111.dkr.ecr.us-west-2.amazonaws.com/frontend:lambda4"
+  image_uri    = "813590939111.dkr.ecr.us-west-2.amazonaws.com/frontend:lambda6"
 
   environment {
     variables = {
       "DUPLO" = "true",
-      "DB_URL_SECRET_NAME" = "duploservices-${local.tenant_name}-${local.secret_name_suffix}"
+      "DB_SECRET_NAME" = "duploservices-${local.tenant_name}-${local.secret_name_suffix}"
     }
-
-    
   }
 
   tracing_config {
