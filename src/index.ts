@@ -14,9 +14,26 @@ DB password: ${db_password}
 `;
 
 app.get('/', (req, res) => {
-  res.send(contents);
+  // res.send(contents);
+  res.writeHead(200, {'Content-Type': 'text/html'}); // Set the Content-Type to HTML
+  const multiLineString = `
+    <html>
+      <head>
+        <title>Multi-line String Example</title>
+      </head>
+      <body>
+        <h1>Hello, World!</h1>
+        <p>This is a multi-line string example.</p>
+        <p>This is a multi-line string example.</p>
+        <p>This is a multi-line string example.</p>
+      </body>
+    </html>
+  `;
+
+  res.end(multiLineString);
 });
 
 export const server = app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+
