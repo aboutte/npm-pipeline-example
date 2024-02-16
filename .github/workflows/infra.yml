@@ -20,9 +20,13 @@ on:
         - apply
         - destroy
       workspace:
-        description: Workspace to run
-        type: string
+        description: Environment to run
+        type: choice
         default: app01
+        options:
+          - app01
+          - app01-dev
+          - app01-prod
       
   workflow_call:
     inputs:
@@ -35,7 +39,7 @@ on:
         type: string
         default: admin-tenant
       workspace:
-        description: Workspace to run
+        description: Environment to run
         type: string
         default: app01
     secrets:
