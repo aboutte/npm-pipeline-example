@@ -20,3 +20,12 @@ resource "duplocloud_k8_secret" "integration" {
     }
   )
 }
+
+resource "duplocloud_tenant_secret" "mysecret2" {
+  tenant_id = local.tenant_id
+
+  # The full name will be:  duploservices-myapp-myjson
+  name_suffix = "myjson"
+
+  data = jsonencode({ foo = "bar" })
+}
