@@ -12,8 +12,8 @@ on:
         required: true
 
 env:
-  DUPLO_HOST: ${{ vars.DUPLO_HOST }}
-  DUPLO_TENANT: ${{ vars.DUPLO_TENANT }}
+  DUPLO_HOST: ${{ secrets.DUPLO_HOST }}
+  DUPLO_TENANT: ${{ secrets.DUPLO_TENANT }}
   DUPLO_TOKEN: ${{ secrets.DUPLO_TOKEN }}
 
 
