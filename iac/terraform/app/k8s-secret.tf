@@ -49,7 +49,7 @@ resource "duplocloud_k8_secret_provider_class" "spc" {
   parameters = yamlencode(
     [
       {
-        "objectName" : "duploservices-dev02-database",
+        "objectName" : "duploservices-${terraform.workspace}-database",
         "objectType" : "secretsmanager",
         "jmesPath" : [
           {
