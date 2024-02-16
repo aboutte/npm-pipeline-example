@@ -55,12 +55,25 @@ resource "duplocloud_duplo_service" "frontend" {
     }
   )
   docker_image = var.svc_frontend_docker_image
+  volumes = jsonencode([
+    {
+      "Name" : "data",
+      "Path" : "/data",
+      "Spec" : {
+        "ConfigMap" : {
+          "Name" : "frontend"
+        }
+      }
+    }
+    ]
+  )
   lifecycle {
     ignore_changes = [
       docker_image
     ]
   }
 }
+
 
 resource "duplocloud_duplo_service_params" "myservice" {
   tenant_id = local.tenant_id
