@@ -1,7 +1,6 @@
 
 FROM public.ecr.aws/lambda/python:latest
 
-COPY src ./src
 COPY lambda_handler.py ./
 COPY requirements.txt ./
 
