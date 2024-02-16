@@ -23,7 +23,7 @@ resource "duplocloud_k8s_cron_job" "queue" {
                 value = "true"
               }
 
-              envFrom {
+              env_from {
                 name  = "SecretRef"
                 value = duplocloud_k8_secret_provider_class.database.secret_object[0].name
               }
