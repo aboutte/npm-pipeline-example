@@ -1,4 +1,5 @@
 
+import os
 import boto3
 from botocore.exceptions import ClientError
 
@@ -29,8 +30,7 @@ def get_secret(secret_name):
 
 
 def handler(event, context):
-    secret_name = 'duploservices-app01-database'
-    secret_value = get_secret(secret_name)
+    secret_value = get_secret(os.getenv('DB_URL_SECRET_NAME'))
     if secret_value:
         print("Secret value:", secret_value)
 

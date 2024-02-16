@@ -3,8 +3,8 @@
 resource "duplocloud_tenant_secret" "database" {
   tenant_id = local.tenant_id
 
-  # The full name will be:  duploservices-myapp-myjson
-  name_suffix = "database"
+  # The full name will be:  duploservices-${tenant-name}-${name_suffix}
+  name_suffix = local.secret_name_suffix
 
   data = jsonencode({
     "DB_URL" : local.db_url
@@ -13,6 +13,7 @@ resource "duplocloud_tenant_secret" "database" {
     })
 }
 
+# Example of a k8s secret that only needs to be available to k8s pods, and not Lambda
 resource "duplocloud_k8_secret" "integration" {
   tenant_id   = local.tenant_id
   secret_name = "integration"

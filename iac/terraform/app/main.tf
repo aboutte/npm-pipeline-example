@@ -23,6 +23,7 @@ locals {
   db_password    = data.terraform_remote_state.aws-services.outputs["db_password"]
   db_username    = data.terraform_remote_state.aws-services.outputs["db_username"]
   db_url    = data.terraform_remote_state.aws-services.outputs["db_url"]
+  secret_name_suffix = "database"
 }
 
 data "terraform_remote_state" "tenant" {
