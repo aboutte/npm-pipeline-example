@@ -90,7 +90,7 @@ resource "duplocloud_duplo_service_lbconfigs" "frontend_config" {
   replication_controller_name = duplocloud_duplo_service.frontend.name
   
   lbconfigs {
-    certificate_arn = data.duplocloud_plan_certificates.certs[0].arn
+    certificate_arn = data.duplocloud_plan_certificates.certs.certificates[0].arn
     lb_type          = 1
     is_native        = false
     is_internal      = false
