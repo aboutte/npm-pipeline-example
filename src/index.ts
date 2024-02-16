@@ -8,7 +8,7 @@ const db_url = process.env.DB_URL
 const db_username = process.env.DB_USERNAME
 const db_password = process.env.DB_PASSWORD
 
-const fileContents = ''
+var fileContents = ''
 
 fs.readFile('/data/foo', 'utf8', (err, data) => {
   if (err) {
