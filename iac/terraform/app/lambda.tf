@@ -11,7 +11,7 @@ resource "duplocloud_aws_lambda_function" "app" {
   environment {
     variables = {
       "DUPLO" = "true",
-      "DB_URL_SECRET_NAME" = duploservices-${local.tenant_name}-${local.secret_name_suffix}
+      "DB_URL_SECRET_NAME" = "duploservices-${local.tenant_name}-${local.secret_name_suffix}"
     }
 
     
