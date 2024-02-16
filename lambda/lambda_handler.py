@@ -28,6 +28,7 @@ def get_secret(secret_name):
 
 def handler(event, context):
     secret_value = json.loads(get_secret(os.getenv('DB_SECRET_NAME')))
+    
     message = 'Database URL: {} Database Username: {} Database Password: {}'.format(secret_value['DB_URL'], secret_value['DB_USERNAME'], secret_value['DB_PASSWORD'])  
     return { 
         'message' : message

@@ -5,3 +5,10 @@ resource "duplocloud_aws_ecr_repository" "frontend" {
   enable_scan_image_on_push = true
   enable_tag_immutability   = false
 }
+
+resource "duplocloud_aws_ecr_repository" "serverless" {
+  tenant_id                 = local.tenant_id
+  name                      = "serverless"
+  enable_scan_image_on_push = true
+  enable_tag_immutability   = false
+}

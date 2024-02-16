@@ -10,34 +10,95 @@ resource "duplocloud_duplo_service" "frontend" {
   agent_platform                       = 7
   cloud                                = 0
   other_docker_config = jsonencode({
+  "Volumes" : [
+          {
+            # Define the CSI volume for the secret we're mounting as a raw json file.  
+            "Name" : "database",
+            "Csi" : {
+              "driver" : "secrets-store.csi.k8s.io",
+              "readOnly" : true,
+              "VolumeAttributes" : {
+                "secretProviderClass" : duplocloud_k8_secret_provider_class.database.name
+              }
+            }
+          },
+
+          # Define the CSI volume for the env var example
+          { "Name" : "database",
+            "Csi" : {
+              "driver" : "secrets-store.csi.k8s.io",
+              "readOnly" : true,
+              "volumeAttributes" : {
+                "secretProviderClass" : duplocloud_k8_secret_provider_class.database.name
+              }
+            }
+          }
+        ]
+      "VolumesMounts" : [
+        {
+          "Name" : "databasevolume",
+          "MountPath" : "/mnt/fulljsonsecret",
+          "readOnly" : true
+        },
+
+        # This is the mount for the env var example.  Note that you MUST do the mount 
+        # before you can use the secret as an env var.
+        # The mount triggers the CSI driver to create the K8s secret, 
+        # which is then available for use as an env var
+        # In this example we didn't specify an objectAlias for the 
+        # secretProviderClass so the file will be mounted as 
+        # /mnt/fieldsenvvar/duploservices-${tenant_name}-demo-secret"
+        # (the name of the secret).  It will have the full text of the secret in json format
+        # It will also create files based on the jmespath expression we provided. 
+        # They will be named after the objectAlias we provided:
+        # file /mnt/fieldsenvvar/MYFIRSTSECRETENVVAR will have contents S0M3S3cretV@Lue 
+        # and /mnt/fieldsenvvar/MYSECONDENVVAR will have contents An0th3rS3cretV@Lue
+        # We will also get a secret named fields-from-secret-manager with this data (decoded here)
+        #data:
+        #  MYFIRSTSECRETENVVAR: S0M3S3cretV@Lue
+        #  MYSECONDSECRETENVVAR: An0th3rS3cretV@Lue
+
+        {
+          "Name" : "database",
+          "MountPath" : "/mnt/fieldsenvvar",
+          "readOnly" : true
+        }
+      ],
+"EnvFrom" : [
+        {
+          "SecretRef" : {
+            "name" : duplocloud_k8_secret_provider_class.database.secret_object[0].name
+          }
+        }
+      ]
     "Env" : [
-      {
-        "name" : "DB_URL",
-        "valueFrom" : {
-          "secretKeyRef" : {
-            "key" : "DB_URL",
-            "name" : "database"
-          }
-        }
-      },
-      {
-        "name" : "DB_USERNAME",
-        "valueFrom" : {
-          "secretKeyRef" : {
-            "key" : "DB_USERNAME",
-            "name" : "database"
-          }
-        }
-      },
-      {
-        "name" : "DB_PASSWORD",
-        "valueFrom" : {
-          "secretKeyRef" : {
-            "key" : "DB_PASSWORD",
-            "name" : "database"
-          }
-        }
-      },
+      # {
+      #   "name" : "DB_URL",
+      #   "valueFrom" : {
+      #     "secretKeyRef" : {
+      #       "key" : "DB_URL",
+      #       "name" : "database"
+      #     }
+      #   }
+      # },
+      # {
+      #   "name" : "DB_USERNAME",
+      #   "valueFrom" : {
+      #     "secretKeyRef" : {
+      #       "key" : "DB_USERNAME",
+      #       "name" : "database"
+      #     }
+      #   }
+      # },
+      # {
+      #   "name" : "DB_PASSWORD",
+      #   "valueFrom" : {
+      #     "secretKeyRef" : {
+      #       "key" : "DB_PASSWORD",
+      #       "name" : "database"
+      #     }
+      #   }
+      # },
       {
         "name" : "INTEGRATION_API_KEY",
         "valueFrom" : {
