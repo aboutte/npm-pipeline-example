@@ -59,6 +59,8 @@ resource "duplocloud_k8s_cron_job" "queue" {
       }
     }
     schedule                      = var.queue_schedule
+    failed_jobs_history_limit     = 2
+    successful_jobs_history_limit = 2
   }
   lifecycle {
     ignore_changes = [

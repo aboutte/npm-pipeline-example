@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
       <body>
         <h1>Hello, World!</h1>
         <p></p>
-        <p>Here are examples of reading environment variables that came from k8s secrets:</p>
+        <p>Here are examples of reading environment variables that came from k8s secrets and the k8s secrets where created from AWS SecretsManager secrets via the k8s secret provider:</p>
         <p>DB URL: ${db_url}</p>
         <p>DB username: ${db_username}</p>
         <p>DB password: ${db_password}</p>
