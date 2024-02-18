@@ -45,11 +45,13 @@ jobs:
 
     - name: Build and Push Serverless Docker Image
       id: build_serverless_image
-      uses: duplocloud/actions/build-image@main
+      uses: aboutte/actions/build-image@main
       with:
         platforms: linux/amd64
         push: true
         registry: "813590939111.dkr.ecr.us-west-2.amazonaws.com"
         repo: "${{ vars.DUPLO_TENANT_BASE }}-prod-serverless"
         context: "lambda/"
-        build-args: "--provenance=false name=${{ github.repository }}"
+        build-args: >
+          --provenance=false
+          name=${{ github.repository }}
