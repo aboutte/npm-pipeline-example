@@ -79,6 +79,6 @@ jobs:
       uses: duplocloud/actions/terraform-exec@main
       with:
         module: iac/terraform/${{ inputs.module }}
-        workspace: ${{ inputs.environment }}
+        workspace: "${{ vars.DUPLO_TENANT_BASE }}-${{ inputs.environment }}"
         command: ${{ inputs.cmd }}
         config: iac/terraform/${{ inputs.module }}/config
