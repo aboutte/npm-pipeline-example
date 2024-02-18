@@ -10,11 +10,6 @@ variable "replica_count" {
   default = 1
 }
 
-variable "base_domain" {
-  default = "salesdemo-apps.duplocloud.net."
-  type    = string
-}
-
 variable "integration_api_key" {
   default = ""
   type    = string

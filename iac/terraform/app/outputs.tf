@@ -1,6 +1,6 @@
 
 output "url" {
-  value       = "${local.tenant_id}.${var.base_domain}"
+  value       = "${terraform.workspace}.${local.base_domain}"
   description = "URL for accessing the frontend"
 }
 

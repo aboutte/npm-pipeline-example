@@ -13,6 +13,10 @@ data "duplocloud_tenant" "tenant" {
   name = local.tenant_name
 }
 
+data "duplocloud_plan_settings" "plan" {
+  plan_id = data.duplocloud_tenant.tenant.plan_id
+}
+
 locals {
   tfstate_bucket = "duplo-tfstate-${data.aws_caller_identity.current.account_id}"
   region         = data.duplocloud_tenant_aws_region.current.aws_region
@@ -22,6 +26,7 @@ locals {
   db_username    = data.terraform_remote_state.aws-services.outputs["db_username"]
   db_url    = data.terraform_remote_state.aws-services.outputs["db_url"]
   secret_name_suffix = "database"
+  base_domain = data.duplocloud_plan_settings.plan.dns_settings[0].external_dns_suffix
 }
 
 data "terraform_remote_state" "tenant" {
