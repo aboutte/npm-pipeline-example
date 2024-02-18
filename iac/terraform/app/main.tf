@@ -26,7 +26,7 @@ locals {
   db_username    = data.terraform_remote_state.aws-services.outputs["db_username"]
   db_url    = data.terraform_remote_state.aws-services.outputs["db_url"]
   secret_name_suffix = "database"
-  base_domain = data.duplocloud_plan_settings.plan.dns_settings[0].external_dns_suffix
+  base_domain = data.duplocloud_plan_settings.plan.dns_setting[0].external_dns_suffix
 }
 
 data "terraform_remote_state" "tenant" {
