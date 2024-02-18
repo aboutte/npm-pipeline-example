@@ -1,10 +1,10 @@
 
-output "s3_search_fullname" {
-  value       = duplocloud_s3_bucket.search.fullname
+output "s3_fullname" {
+  value       = duplocloud_s3_bucket.docs.fullname
   description = "The full name of the S3 bucket."
 }
-output "s3_search_arn" {
-  value       = duplocloud_s3_bucket.search.arn
+output "s3_arn" {
+  value       = duplocloud_s3_bucket.docs.arn
   description = "The ARN of the S3 bucket."
 }
 
