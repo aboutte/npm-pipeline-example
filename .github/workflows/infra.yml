@@ -1,4 +1,4 @@
-name: Infra Pipelines
+name: Infrastructure Pipelines
 
 on:
   workflow_dispatch:
@@ -53,7 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DUPLO_TOKEN: ${{ secrets.DUPLO_TOKEN }}
-      DUPLO_HOST: ${{ secrets.DUPLO_HOST }}
+      DUPLO_HOST: ${{ vars.DUPLO_HOST }}
       DUPLO_TENANT: "${{ vars.DUPLO_TENANT_BASE }}-${{ inputs.environment }}"
       TF_VAR_integration_api_key: ${{ secrets.INTEGRATION_API_KEY }}
       TF_CLI_ARGS_apply: -parallelism=1
