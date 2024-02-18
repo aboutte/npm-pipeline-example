@@ -52,6 +52,4 @@ jobs:
         registry: "813590939111.dkr.ecr.us-west-2.amazonaws.com"
         repo: "${{ vars.DUPLO_TENANT_BASE }}-prod-serverless"
         context: "lambda/"
-        build-args: >
-          --provenance=false
-          name=${{ github.repository }}
+        build-args: "--provenance=false name=${{ github.repository }}"
