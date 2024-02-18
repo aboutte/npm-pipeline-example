@@ -47,7 +47,7 @@ jobs:
       id: build_serverless_image
       uses: aboutte/actions/build-image@main
       with:
-        platforms: linux/arm64
+        platforms: linux/amd64
         push: true
         registry: "813590939111.dkr.ecr.us-west-2.amazonaws.com"
         repo: "${{ vars.DUPLO_TENANT_BASE }}-prod-serverless"
