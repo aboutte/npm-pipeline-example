@@ -1,57 +1,52 @@
-# AWS Reference Architecture Project
+# 3 Tier Web Application AWS Reference Architecture
 
 ## Overview
-Brief description of the project, including its purpose and goals. Explain what problem the reference architecture solves and who it is intended for.
+
+This project combines a sample application, pipelines, and infrastructure as code to stand up a reference architecture leveraging the DuploCloud Platform.
 
 ## Table of Contents
-- [AWS Reference Architecture Project](#aws-reference-architecture-project)
+- [3 Tier Web Application AWS Reference Architecture](#3-tier-web-application-aws-reference-architecture)
   - [Overview](#overview)
   - [Table of Contents](#table-of-contents)
   - [Architecture Diagram](#architecture-diagram)
   - [Components](#components)
   - [Deployment](#deployment)
   - [Configuration](#configuration)
-  - [Testing](#testing)
-  - [Usage](#usage)
-  - [Contributing](#contributing)
   - [License](#license)
-  - [Additional Resources](#additional-resources)
-  - [Support](#support)
-  - [Acknowledgments](#acknowledgments)
-  - [Contact](#contact)
 
 ## Architecture Diagram
-Include a visual representation of the architecture using diagrams or charts. This helps users understand the different components and how they interact.
+
+
+![AWS diagram of what this project will create](diagram.png "3 Tier Web Application AWS Reference Architecture Digram")
+
 
 ## Components
-Explain each component of the architecture, including its purpose, functionality, and how it fits into the overall solution. List any AWS services or resources used.
+
+- Application
+- Pipelines
+- Infrastructure as code
 
 ## Deployment
-Provide instructions for deploying the reference architecture on AWS. Include any prerequisites, such as AWS account setup, IAM roles, or VPC configuration.
+
+This GitHub project is a template project.  You can create your own GitHub repository from this template.  
+
+Create GitHub Actions secrets
+
+
+- DUPLO_HOST
+- DUPLO_TOKEN
+
+
+Run infra pipeline for admin-tenant apply
+Run infra pipeline for aws-servies apply
+
+Run image pipelines
+
+Run infra pipeline for app
 
 ## Configuration
-Explain any configuration options or parameters that can be customized. Provide guidance on how to modify the architecture to fit specific use cases or requirements.
 
-## Testing
-Describe the testing strategy for the reference architecture. Include information on how to run tests, what tests are included, and how to interpret the results.
 
-## Usage
-Provide examples or use cases demonstrating how to use the reference architecture in real-world scenarios. Include code snippets, CLI commands, or API calls as needed.
-
-## Contributing
-Explain how others can contribute to the project. This may include guidelines for submitting bug reports, feature requests, or pull requests.
 
 ## License
-Specify the license under which the project is distributed. Include any terms and conditions for use, modification, and distribution of the code.
 
-## Additional Resources
-Provide links to any additional documentation, tutorials, or resources that may be helpful for understanding or using the reference architecture.
-
-## Support
-Offer information on where users can get help or support if they encounter issues or have questions about the project.
-
-## Acknowledgments
-Recognize any individuals or organizations that contributed to the development of the reference architecture.
-
-## Contact
-Provide contact information for the project maintainers or contributors in case users need to reach out for assistance or collaboration.
