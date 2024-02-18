@@ -53,4 +53,5 @@ jobs:
         repo: "${{ vars.DUPLO_TENANT_BASE }}-prod-serverless"
         context: "lambda/"
         build-args: >
+          --provenance=false
           name=${{ github.repository }}
