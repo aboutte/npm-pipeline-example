@@ -61,7 +61,7 @@ jobs:
       run: |
         cd lambda
         docker build -t lambda .
-        docker tag lambda:main ${{ env.ECR_REGISTRY }}/${{ vars.DUPLO_TENANT_BASE }}-prod-serverless:main
+        docker tag lambda ${{ env.ECR_REGISTRY }}/${{ vars.DUPLO_TENANT_BASE }}-prod-serverless:main
         docker push ${{ env.ECR_REGISTRY }}/${{ vars.DUPLO_TENANT_BASE }}-prod-serverless:main
 
 
