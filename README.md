@@ -33,8 +33,9 @@ This GitHub project is a template project.  You can create your own GitHub repos
 Create GitHub Actions secrets
 
 
-- DUPLO_HOST
-- DUPLO_TOKEN
+- DUPLO_HOST (environment variable)
+- DUPLO_TENANT_BASE (environment variable)
+- DUPLO_TOKEN (secret)
 
 
 Run infra pipeline for admin-tenant apply

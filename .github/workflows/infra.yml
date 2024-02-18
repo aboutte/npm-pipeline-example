@@ -19,14 +19,15 @@ on:
         - plan
         - apply
         - destroy
-      workspace:
+      environment:
         description: Environment to run
         type: choice
-        default: app01
+        default: dev
         options:
-          - app01
-          - app01-dev
-          - app01-prod
+          - dev
+          - qa
+          - stage
+          - prod
       
   workflow_call:
     inputs:
@@ -38,22 +39,22 @@ on:
         description: Module to run
         type: string
         default: admin-tenant
-      workspace:
+      environment:
         description: Environment to run
         type: string
-        default: app01
+        default: dev
     secrets:
       DUPLO_TOKEN:
         description: Duplo Token
         required: true
 jobs:
   module:
-    name: ${{ inputs.cmd }} ${{ inputs.workspace }} ${{ inputs.module }}
+    name: ${{ inputs.cmd }} ${{ inputs.environment }} ${{ inputs.module }}
     runs-on: ubuntu-latest
     env:
       DUPLO_TOKEN: ${{ secrets.DUPLO_TOKEN }}
       DUPLO_HOST: ${{ secrets.DUPLO_HOST }}
-      DUPLO_TENANT: ${{ inputs.workspace }}
+      DUPLO_TENANT: "${{ vars.DUPLO_TENANT_BASE }}-${{ inputs.environment }}"
       TF_VAR_integration_api_key: ${{ secrets.INTEGRATION_API_KEY }}
       TF_CLI_ARGS_apply: -parallelism=1
     steps:
@@ -78,6 +79,6 @@ jobs:
       uses: duplocloud/actions/terraform-exec@main
       with:
         module: iac/terraform/${{ inputs.module }}
-        workspace: ${{ inputs.workspace }}
+        workspace: ${{ inputs.environment }}
         command: ${{ inputs.cmd }}
         config: iac/terraform/${{ inputs.module }}/config
