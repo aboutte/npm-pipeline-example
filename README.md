@@ -45,9 +45,24 @@ Run image pipelines
 
 Run infra pipeline for app
 
+![](./assets/infra-pipeline-workflow.png)
+
+
+
 ## Configuration
 
+To customize the infrastructure between the different environments (dev, qa, staging, production) you can create Terraform variables file under the following path:
 
+```
+iac/terraform/$project/config/$DUPLO_TENANT_BASE-$environment/$project.tfvars
+```
+
+$DUPLO_TENANT_BASE
+$ENVIRONMENT
+$PROJECT
+
+An example of this has been provided in `iac/terraform/aws-services/config/app01-prod/aws-services.tfvars` to increase the size of the AutoScaling group from 1 to 2. 
 
 ## License
 
+See LICENSE file
