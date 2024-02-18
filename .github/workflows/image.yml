@@ -12,8 +12,7 @@ on:
         required: true
 
 env:
-  DUPLO_HOST: ${{ secrets.DUPLO_HOST }}
-  DUPLO_TENANT: ${{ secrets.DUPLO_TENANT }}
+  DUPLO_HOST: ${{ vars.DUPLO_HOST }}
   DUPLO_TOKEN: ${{ secrets.DUPLO_TOKEN }}
 
 
@@ -40,7 +39,7 @@ jobs:
         platforms: linux/amd64
         push: true
         registry: "813590939111.dkr.ecr.us-west-2.amazonaws.com"
-        repo: "frontend"
+        repo: "${{ vars.DUPLO_TENANT_BASE }}-prod-frontend"
         build-args: >
           name=${{ github.repository }}
 
@@ -51,7 +50,7 @@ jobs:
         platforms: linux/amd64
         push: true
         registry: "813590939111.dkr.ecr.us-west-2.amazonaws.com"
-        repo: "serverless"
+        repo: "${{ vars.DUPLO_TENANT_BASE }}-prod-serverless"
         context: "lambda/"
         build-args: >
           name=${{ github.repository }}
