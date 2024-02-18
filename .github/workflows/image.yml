@@ -44,40 +44,11 @@ jobs:
         build-args: >
           name=${{ github.repository }}
 
-    # - name: Build Lambda Function
-    #   run: |
-    #     cd lambda
-    #     pip install -r requirements.txt --target ./package
-    #     cd package
-    #     zip -r ../my_deployment_package.zip .
-    #     cd ..
-    #     zip my_deployment_package.zip lambda_handler.py
-
-    # - name: Upload Lambda Function
-    #   run: |
-    #     aws s3 cp my_deployment_package.zip s3://duploservices-app01-prod-search-813590939111/
-
+    # https://github.com/docker/buildx/issues/1513
+    # I couldnt seem to get the docker image build to work in a way that is compatible with Lambda
     - name: Build Lambda Function
       run: |
         cd lambda
         docker build -t lambda .
         docker tag lambda ${{ env.ECR_REGISTRY }}/${{ vars.DUPLO_TENANT_BASE }}-prod-serverless:main
         docker push ${{ env.ECR_REGISTRY }}/${{ vars.DUPLO_TENANT_BASE }}-prod-serverless:main
-
-
-    # https://github.com/docker/buildx/issues/1513
-    # I couldnt seem to get the docker image build to work in a way that is compatible with Lambda
-    # Switching to using a zip
-    # - name: Build and Push Serverless Docker Image
-    #   id: build_serverless_image
-    #   uses: aboutte/actions/build-image@main
-    #   with:
-    #     platforms: linux/amd64
-    #     push: true
-    #     registry: "813590939111.dkr.ecr.us-west-2.amazonaws.com"
-    #     repo: "${{ vars.DUPLO_TENANT_BASE }}-prod-serverless"
-    #     context: "lambda/"
-    #     build-args: >
-    #       --provenance=false
-    #       name=${{ github.repository }}
-          
