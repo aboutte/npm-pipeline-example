@@ -40,33 +40,7 @@ resource "duplocloud_duplo_service" "frontend" {
         }
       ]
     "Env" : [
-      # {
-      #   "name" : "DB_URL",
-      #   "valueFrom" : {
-      #     "secretKeyRef" : {
-      #       "key" : "DB_URL",
-      #       "name" : "database"
-      #     }
-      #   }
-      # },
-      # {
-      #   "name" : "DB_USERNAME",
-      #   "valueFrom" : {
-      #     "secretKeyRef" : {
-      #       "key" : "DB_USERNAME",
-      #       "name" : "database"
-      #     }
-      #   }
-      # },
-      # {
-      #   "name" : "DB_PASSWORD",
-      #   "valueFrom" : {
-      #     "secretKeyRef" : {
-      #       "key" : "DB_PASSWORD",
-      #       "name" : "database"
-      #     }
-      #   }
-      # },
+
       {
         "name" : "INTEGRATION_API_KEY",
         "valueFrom" : {
@@ -79,7 +53,17 @@ resource "duplocloud_duplo_service" "frontend" {
       {
         "Name" : "DUPLO",
         "Value" : "true"
+      },
+      {
+        "Name" : "SQS_FULLNAME",
+        "Value" : local.sqs_fullname
+      },
+      {
+        "Name" : "AWS_REGION",
+        "Value" : local.region
       }
+
+
     ]
     }
   )

@@ -8,6 +8,8 @@ const db_url = process.env.DB_URL
 const db_username = process.env.DB_USERNAME
 const db_password = process.env.DB_PASSWORD
 const integration_api_key = process.env.INTEGRATION_API_KEY
+const sqs_fullname = process.env.SQS_FULLNAME
+const aws_region = process.env.AWS_REGION
 
 var fileContents = ''
 
@@ -40,6 +42,10 @@ app.get('/', (req, res) => {
 
         <p></p>
         <p>Here are examples of reading from a config map:</p>
+        <p>/data/foo: ${fileContents}</p>
+
+        <p></p>
+        <p>SQS details:</p>
         <p>/data/foo: ${fileContents}</p>
       </body>
     </html>

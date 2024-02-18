@@ -35,3 +35,7 @@ output "db_url" {
   description = "url for the database"
 }
 
+output "sqs_fullname" {
+  value       = duplocloud_aws_sqs_queue.sqs_queue.fullname
+  description = "The SQS Queue fullname"
+}

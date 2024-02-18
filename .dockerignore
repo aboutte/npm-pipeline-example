@@ -6,3 +6,4 @@ dist
 README.md
 src/*.spec.ts
 iac/
+lambda/
