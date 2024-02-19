@@ -39,7 +39,7 @@ jobs:
     env:
       DUPLO_TOKEN: ${{ secrets.DUPLO_TOKEN }}
       DUPLO_HOST: ${{ secrets.DUPLO_HOST  }}
-      DUPLO_TENANT: "${{ vars.DUPLO_TENANT_BASE }}-${{ inputs.environment }}"
+      DUPLO_TENANT: "app01-prod" 
     steps: 
     - name: Duplo Setup
       uses: duplocloud/actions/setup@main
