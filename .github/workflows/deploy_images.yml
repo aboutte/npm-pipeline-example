@@ -9,9 +9,13 @@ on:
         required: true
       environment:
         description: Environment to run
-        type: string
-        required: true
-        default: app01
+        type: choice
+        default: dev
+        options:
+          - dev
+          - qa
+          - stage
+          - prod
   workflow_call:
     inputs:
       image:
