@@ -1,14 +1,10 @@
 # 3 Tier Web Application AWS Reference Architecture
 
-## Overview
-
-This project combines a sample application, pipelines, and infrastructure as code to stand up a reference architecture leveraging the DuploCloud Platform.
-
 ## Table of Contents
 
 - [3 Tier Web Application AWS Reference Architecture](#3-tier-web-application-aws-reference-architecture)
-  - [Overview](#overview)
   - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
   - [Architecture Diagram](#architecture-diagram)
   - [Components](#components)
     - [Application](#application)
@@ -24,9 +20,16 @@ This project combines a sample application, pipelines, and infrastructure as cod
       - [Build and Publish Iamges](#build-and-publish-iamges)
       - [Infrastructure Pipelines - app](#infrastructure-pipelines---app)
       - [Environment Validation](#environment-validation)
+        - [Web Application](#web-application)
+        - [Lambda](#lambda)
+        - [k8s cronjob](#k8s-cronjob)
   - [Terraform Configuration](#terraform-configuration)
   - [Application Referencing Infrastructure](#application-referencing-infrastructure)
   - [License](#license)
+
+## Overview
+
+This project combines a sample application, pipelines, and infrastructure as code to stand up a reference architecture leveraging the DuploCloud Platform.
 
 ## Architecture Diagram
 
@@ -36,11 +39,11 @@ This project combines a sample application, pipelines, and infrastructure as cod
 
 ### Application
 
-The application portion of this project consists of a Node application that will run in EKS, a k8s cronjob that schedules a container on an interval, and a Lambda function.
+The application portion of this project consists of a Node application that will run in EKS, a k8s cronjob that schedules a container on an interval, and a python Lambda function.
 
 ### Pipelines
 
-GitHub actions it used for all pipelines.  The pipelines are broken down into three areas:
+GitHub Actions it used for all pipelines.  The pipelines are broken down into three areas:
 
 - Infra - This pipeline maps to the Terraform which is talked about in the following section
 - Build and publish docker images
@@ -48,16 +51,15 @@ GitHub actions it used for all pipelines.  The pipelines are broken down into th
 
 ### Infrastructure as Code
 
+Terraform is used for all Infrastructure as Code (IaC).  The Terraform is broken down into three modules:
 
-Terraform is used for all Infrastructure as Code (IaC).  The Terraform is broken down into three modules
-
-- admin-tenant - This creates the DuploCloud Tenant.  Details about the DuploCloud can be found [here](https://docs.duplocloud.com/docs/getting-started/application-focussed-interface/tenant).
+- admin-tenant - This creates the DuploCloud Tenant.  Details about the DuploCloud Tenant can be found [here](https://docs.duplocloud.com/docs/getting-started/application-focussed-interface/tenant).
 - aws-services - This creates all of the AWS Services to support the application (RDS, SQS, EKS worker nodes, etc)
-- app - This deploys the application and provides all of the required configuration (environemnt variables, secrets, etc)
+- app - This deploys the application and provides all of the required configuration (environemnt variables, secrets, configmap etc)
 
-The Terraform is written in a way where multiple environments (dev, qa, staging, production) can be created and maintaine from the same Terraform project.  More on this in the Configuraiton section below. 
+The Terraform is written in a way where multiple environments (dev, qa, staging, production) can be created and maintained from the same Terraform project.  More on this in the Configuraiton section below.
 
-Each Terraform module can be found under the `iac/terraform` directory and a REAADME has been provided to document all inputs and outputs.
+Each Terraform module can be found under the `iac/terraform` directory and a REAADME has been provided to document all inputs and outputs ([admin-tenant](iac/terraform/admin-tenant/README.md), [aws-services](iac/terraform/aws-services/README.md), [app](iac/terraform/app/README.md)).
 
 ## Deployment
 
@@ -66,6 +68,7 @@ Each Terraform module can be found under the `iac/terraform` directory and a REA
 1) terraform version 1.5.5 or newer is required for local development
 2) you have admin access to a DuploCloud environment to generate a long lived admin [DuploCloud Token](https://docs.duplocloud.com/docs/user-administration/access-control/api-tokens#creating-a-permanent-api-token)
 3) you have a Duplocloud Infrastructure named "prod-infra" or you create a TF variables override file that updates the value of `infra_name`.  More on TF variable overrie files further down.
+4) AWS ACM certificate added to the DuploCloud Plan that is assicated with the `infra_name`
 
 ### Create Repo
 
@@ -107,12 +110,11 @@ You can repeat this step and select dev for Environment or move on to the next s
 
 Under the Infrastructure Piplines click Run workflow and in the form for Module select aws-services, for Command select apply, and for Environment select prod then click Run workflow.
 
-
 #### Build and Publish Iamges
 
-Now that the aws-services modules under Infrastructure Pipelines is complete we can build and publish our docker images.  This step must come after aws-services because aws-services includes the required ECR Repository. 
+Now that the aws-services modules under Infrastructure Pipelines is complete we can build and publish our docker images.  This step must come after aws-services because aws-services includes the required ECR Repository.
 
-Click on Actions, click on Build and Publish Images, click on Run workflow, leave all settings as their defaults, and click Run workflow. 
+Click on Actions, click on Build and Publish Images, click on Run workflow, leave all settings as their defaults, and click Run workflow.
 
 #### Infrastructure Pipelines - app
 
@@ -124,9 +126,38 @@ This step will deploy the frontend application to EKS, configure a k8s cronjob a
 
 #### Environment Validation
 
-web app
-lamba
-k8s cron
+##### Web Application
+
+![](./assets/web-app-validation.png)
+
+##### Lambda
+
+You can manualy invoke the Lambda function via the AWS console by following these steps:
+
+1) DevOps
+2) Serverless
+3) Click the action menu for the demo function and click Console
+4) Once in the AWS console click on the Test tab and click the Test button
+5) You will see output like the following:
+
+```json
+{
+  "message": "Database URL: duploapp01-prod-app.cxth8ehuztih.us-west-2.rds.amazonaws.com Database Username: appadmin Database Password: jFU6LUrYJCgpQnzL"
+}
+```
+
+##### k8s cronjob
+
+You can check the logs of any of the `completed` k8s cronjob pods and you will see log entries like the following:
+
+```
+Mon Feb 19 16:15:01 UTC 2024
+Hello from the Kubernetes cluster
+the database url is: duploapp01-prod-app.cxth8ehuztih.us-west-2.rds.amazonaws.com
+```
+
+You can check the environmetn variable configuration in DuploCloud at DevOps -> Containers -> EKS / Native -> k8s CronJob -> queue-processor.
+
 
 ## Terraform Configuration
 

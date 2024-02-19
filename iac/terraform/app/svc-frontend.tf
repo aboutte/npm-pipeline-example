@@ -87,7 +87,6 @@ resource "duplocloud_duplo_service" "frontend" {
   }
 }
 
-
 resource "duplocloud_duplo_service_params" "myservice" {
   tenant_id = local.tenant_id
 
