@@ -1,4 +1,4 @@
-name: Update Service
+name: Update Service Docker Image
 
 on: 
   workflow_dispatch:
@@ -7,8 +7,8 @@ on:
         description: The full image
         type: string
         required: true
-      workspace:
-        description: Workspace to run
+      environment:
+        description: Environment to run
         type: string
         required: true
         default: app01
@@ -18,8 +18,8 @@ on:
         description: The full image
         required: true
         type: string
-      workspace:
-        description: Workspace to run
+      environment:
+        description: Environment to run
         type: string
         required: true
         default: app01
@@ -36,7 +36,7 @@ jobs:
     env:
       DUPLO_TOKEN: ${{ secrets.DUPLO_TOKEN }}
       DUPLO_HOST: ${{ secrets.DUPLO_HOST  }}
-      DUPLO_TENANT: ${{ inputs.workspace }}
+      DUPLO_TENANT: "${{ vars.DUPLO_TENANT_BASE }}-${{ inputs.environment }}"
     steps: 
     - name: Duplo Setup
       uses: duplocloud/actions/setup@main
