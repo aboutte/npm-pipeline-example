@@ -10,7 +10,7 @@ resource "duplocloud_tenant_secret" "database" {
     "DB_URL" : local.db_url
     "DB_USERNAME" : local.db_username
     "DB_PASSWORD" : local.db_password
-    })
+  })
 }
 
 # Example of a k8s secret that only needs to be available to k8s pods, and not Lambda

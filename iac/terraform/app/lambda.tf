@@ -10,7 +10,7 @@ resource "duplocloud_aws_lambda_function" "app" {
 
   environment {
     variables = {
-      "DUPLO" = "true",
+      "DUPLO"          = "true",
       "DB_SECRET_NAME" = "duploservices-${local.tenant_name}-${local.secret_name_suffix}"
     }
   }

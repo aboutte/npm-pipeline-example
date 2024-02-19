@@ -6,13 +6,13 @@ variable "svc_frontend_docker_image" {
 
 
 variable "replica_count" {
-  type = number
+  type    = number
   default = 1
 }
 
 variable "integration_api_key" {
-  default = ""
-  type    = string
+  default   = ""
+  type      = string
   sensitive = true
 }
 

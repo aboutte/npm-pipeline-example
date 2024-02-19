@@ -15,8 +15,8 @@ resource "duplocloud_k8s_cron_job" "queue" {
               name              = "scheduler"
               image             = "busybox:latest"
               image_pull_policy = "Always"
-              command = ["/bin/sh", "-c", "date; echo Hello from the Kubernetes cluster; echo the database url is: $DB_URL"]
-              
+              command           = ["/bin/sh", "-c", "date; echo Hello from the Kubernetes cluster; echo the database url is: $DB_URL"]
+
 
               env {
                 name  = "DUPLO"
@@ -27,7 +27,7 @@ resource "duplocloud_k8s_cron_job" "queue" {
                 secret_ref {
                   name = duplocloud_k8_secret_provider_class.database.secret_object[0].name
                 }
-                
+
               }
 
 

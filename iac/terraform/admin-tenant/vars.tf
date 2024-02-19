@@ -3,6 +3,6 @@ variable "region" {
   type    = string
 }
 variable "infra_name" {
-  type = string
+  type    = string
   default = "prod-infra"
 }

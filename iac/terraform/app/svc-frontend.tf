@@ -6,39 +6,39 @@ resource "duplocloud_duplo_service" "frontend" {
   lb_synced_deployment                 = false
   cloud_creds_from_k8s_service_account = true
   is_daemonset                         = false
-  is_unique_k8s_node_required = true
+  is_unique_k8s_node_required          = true
   agent_platform                       = 7
   cloud                                = 0
   other_docker_config = jsonencode({
-  "Volumes" : [
+    "Volumes" : [
 
 
-          # Define the CSI volume for the env var example
-          { "Name" : "database",
-            "Csi" : {
-              "driver" : "secrets-store.csi.k8s.io",
-              "readOnly" : true,
-              "volumeAttributes" : {
-                "secretProviderClass" : duplocloud_k8_secret_provider_class.database.name
-              }
-            }
-          }
-        ]
-      "VolumesMounts" : [
-
-        {
-          "Name" : "database",
-          "MountPath" : "/mnt/fieldsenvvar",
-          "readOnly" : true
-        }
-      ],
-"EnvFrom" : [
-        {
-          "SecretRef" : {
-            "name" : duplocloud_k8_secret_provider_class.database.secret_object[0].name
+      # Define the CSI volume for the env var example
+      { "Name" : "database",
+        "Csi" : {
+          "driver" : "secrets-store.csi.k8s.io",
+          "readOnly" : true,
+          "volumeAttributes" : {
+            "secretProviderClass" : duplocloud_k8_secret_provider_class.database.name
           }
         }
-      ]
+      }
+    ]
+    "VolumesMounts" : [
+
+      {
+        "Name" : "database",
+        "MountPath" : "/mnt/fieldsenvvar",
+        "readOnly" : true
+      }
+    ],
+    "EnvFrom" : [
+      {
+        "SecretRef" : {
+          "name" : duplocloud_k8_secret_provider_class.database.secret_object[0].name
+        }
+      }
+    ]
     "Env" : [
 
       {
@@ -101,9 +101,9 @@ resource "duplocloud_duplo_service_params" "myservice" {
 resource "duplocloud_duplo_service_lbconfigs" "frontend_config" {
   tenant_id                   = duplocloud_duplo_service.frontend.tenant_id
   replication_controller_name = duplocloud_duplo_service.frontend.name
-  
+
   lbconfigs {
-    certificate_arn = data.duplocloud_plan_certificates.certs.certificates[0].arn
+    certificate_arn  = data.duplocloud_plan_certificates.certs.certificates[0].arn
     lb_type          = 1
     is_native        = false
     is_internal      = false

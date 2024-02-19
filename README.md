@@ -11,6 +11,7 @@ This project combines a sample application, pipelines, and infrastructure as cod
   - [Architecture Diagram](#architecture-diagram)
   - [Components](#components)
   - [Deployment](#deployment)
+    - [Assumption](#assumption)
   - [Configuration](#configuration)
   - [License](#license)
 
@@ -26,7 +27,14 @@ This project combines a sample application, pipelines, and infrastructure as cod
 - Pipelines
 - Infrastructure as code
 
+
 ## Deployment
+
+### Assumption
+
+- terraform version
+- set github env and secrets
+- duplo token has admin permission
 
 This GitHub project is a template project.  You can create your own GitHub repository from this template.  
 
@@ -66,3 +74,4 @@ An example of this has been provided in `iac/terraform/aws-services/config/app01
 ## License
 
 See LICENSE file
+

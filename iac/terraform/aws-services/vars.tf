@@ -17,9 +17,9 @@ variable "s3_search_enable_versioning" {
 }
 
 variable "asg_instance_count" {
-  default = 1
+  default     = 1
   description = "Number of nodes in each ASG (one ASG per AZ)"
-  type    = number
+  type        = number
 }
 
 variable "asg_os_disk_size" {
