@@ -26,12 +26,11 @@ on:
         description: Environment to run
         type: string
         required: true
-        default: app01
+        default: dev
     secrets:
       DUPLO_TOKEN:
         description: The Duplo API token
         required: true
-
 
 jobs:
   update_service:

@@ -47,6 +47,7 @@ on:
       DUPLO_TOKEN:
         description: Duplo Token
         required: true
+
 jobs:
   module:
     name: ${{ inputs.cmd }} ${{ inputs.environment }} ${{ inputs.module }}
