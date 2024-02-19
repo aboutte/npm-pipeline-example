@@ -38,8 +38,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DUPLO_TOKEN: ${{ secrets.DUPLO_TOKEN }}
-      DUPLO_HOST: ${{ secrets.DUPLO_HOST  }}
-      DUPLO_TENANT: "app01-prod" 
+      DUPLO_HOST: ${{ vars.DUPLO_HOST  }}
+      DUPLO_TENANT: "${{ vars.DUPLO_TENANT_BASE }}-${{ inputs.environment }}"
     steps: 
     - name: Duplo Setup
       uses: duplocloud/actions/setup@main

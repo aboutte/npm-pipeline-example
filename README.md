@@ -32,7 +32,6 @@ This project combines a sample application, pipelines, and infrastructure as cod
 
 ![AWS diagram of what this project will create](diagram.png "3 Tier Web Application AWS Reference Architecture Digram")
 
-
 ## Components
 
 ### Application
@@ -60,13 +59,13 @@ The Terraform is written in a way where multiple environments (dev, qa, staging,
 
 Each Terraform module can be found under the `iac/terraform` directory and a REAADME has been provided to document all inputs and outputs.
 
-
 ## Deployment
 
 ### Assumption
 
 1) terraform version 1.5.5 or newer is required for local development
-2) you have admin access to a DuploCloud environment to generate a long lived admin [DuploCloud Token](https://docs.duplocloud.com/docs/user-administration/access-control/api-tokens#creating-a-permanent-api-token) 
+2) you have admin access to a DuploCloud environment to generate a long lived admin [DuploCloud Token](https://docs.duplocloud.com/docs/user-administration/access-control/api-tokens#creating-a-permanent-api-token)
+3) you have a Duplocloud Infrastructure named "prod-infra" or you create a TF variables override file that updates the value of `infra_name`.  More on TF variable overrie files further down.
 
 ### Create Repo
 
