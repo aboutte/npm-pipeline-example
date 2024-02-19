@@ -28,7 +28,7 @@ locals {
   sqs_fullname       = data.terraform_remote_state.aws-services.outputs["sqs_full_name"]
   secret_name_suffix = "database"
   base_domain        = data.duplocloud_plan_settings.plan.dns_setting[0].external_dns_suffix
-  default_frontend_docker_image = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${region}.amazonaws.com/${terraform.workspace}-frontend:main"
+  default_frontend_docker_image = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${local.region}.amazonaws.com/${terraform.workspace}-frontend:main"
 }
 
 data "terraform_remote_state" "tenant" {
