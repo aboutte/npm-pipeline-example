@@ -38,15 +38,21 @@ app.get('/', (req, res) => {
         <p>DB password: ${db_password}</p>
 
         <p>Here are examples of reading environment variables that came from k8s secrets where the value came from GitHub Action Secrets:</p>
-        <p>Integration aPI Key: ${integration_api_key}</p>
+        NOTE: if you do not see a value here set a GitHub Action secret key INTEGRATION_API_KEY with a random value
+        <p>Integration API Key: ${integration_api_key}</p>
 
         <p></p>
         <p>Here are examples of reading from a config map:</p>
         <p>/data/foo: ${fileContents}</p>
 
         <p></p>
-        <p>SQS details:</p>
+        <p>k8s Configmap:</p>
         <p>/data/foo: ${fileContents}</p>
+
+        <p></p>
+        <p>SQS details:</p>
+        <p>Queue name: ${sqs_fullname}</p>
+        <p>Queue region: ${aws_region}</p>
       </body>
     </html>
   `;

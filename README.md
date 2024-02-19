@@ -5,73 +5,155 @@
 This project combines a sample application, pipelines, and infrastructure as code to stand up a reference architecture leveraging the DuploCloud Platform.
 
 ## Table of Contents
+
 - [3 Tier Web Application AWS Reference Architecture](#3-tier-web-application-aws-reference-architecture)
   - [Overview](#overview)
   - [Table of Contents](#table-of-contents)
   - [Architecture Diagram](#architecture-diagram)
   - [Components](#components)
+    - [Application](#application)
+    - [Pipelines](#pipelines)
+    - [Infrastructure as Code](#infrastructure-as-code)
   - [Deployment](#deployment)
     - [Assumption](#assumption)
-  - [Configuration](#configuration)
+    - [Create Repo](#create-repo)
+    - [Configuration](#configuration)
+    - [Deployment Steps](#deployment-steps)
+      - [Infrastructure Pipelines - admin-tenant](#infrastructure-pipelines---admin-tenant)
+      - [Infrastructure Pipelines - aws-services](#infrastructure-pipelines---aws-services)
+      - [Build and Publish Iamges](#build-and-publish-iamges)
+      - [Infrastructure Pipelines - app](#infrastructure-pipelines---app)
+      - [Environment Validation](#environment-validation)
+  - [Terraform Configuration](#terraform-configuration)
+  - [Application Referencing Infrastructure](#application-referencing-infrastructure)
   - [License](#license)
 
 ## Architecture Diagram
-
 
 ![AWS diagram of what this project will create](diagram.png "3 Tier Web Application AWS Reference Architecture Digram")
 
 
 ## Components
 
-- Application
-- Pipelines
-- Infrastructure as code
+### Application
+
+The application portion of this project consists of a Node application that will run in EKS, a k8s cronjob that schedules a container on an interval, and a Lambda function.
+
+### Pipelines
+
+GitHub actions it used for all pipelines.  The pipelines are broken down into three areas:
+
+- Infra - This pipeline maps to the Terraform which is talked about in the following section
+- Build and publish docker images
+- Update environment to run new docker image versions
+
+### Infrastructure as Code
+
+
+Terraform is used for all Infrastructure as Code (IaC).  The Terraform is broken down into three modules
+
+- admin-tenant - This creates the DuploCloud Tenant.  Details about the DuploCloud can be found [here](https://docs.duplocloud.com/docs/getting-started/application-focussed-interface/tenant).
+- aws-services - This creates all of the AWS Services to support the application (RDS, SQS, EKS worker nodes, etc)
+- app - This deploys the application and provides all of the required configuration (environemnt variables, secrets, etc)
+
+The Terraform is written in a way where multiple environments (dev, qa, staging, production) can be created and maintaine from the same Terraform project.  More on this in the Configuraiton section below. 
+
+Each Terraform module can be found under the `iac/terraform` directory and a REAADME has been provided to document all inputs and outputs.
 
 
 ## Deployment
 
 ### Assumption
 
-- terraform version
-- set github env and secrets
-- duplo token has admin permission
+1) terraform version 1.5.5 or newer is required for local development
+2) you have admin access to a DuploCloud environment to generate a long lived admin [DuploCloud Token](https://docs.duplocloud.com/docs/user-administration/access-control/api-tokens#creating-a-permanent-api-token) 
 
-This GitHub project is a template project.  You can create your own GitHub repository from this template.  
+### Create Repo
 
-Create GitHub Actions secrets
+This GitHub project is a template project.  You can create your own GitHub repository, in your own GitHub Organization, by clicking on the green "Use this template" button and then "Create a new repository" option.
+
+![](./assets/github-create-repo-from-template.png)
+
+On the next page select a name for your repostiry, select public or private, and click "Create repository".
+
+### Configuration
+
+Once your GitHub repository is created we need to add some configuration at the repository level.  Click on "Settings", then "Secrets and variables", and then Actions.
+
+![](./assets/github-actions-secrets-variables.png)
+
+Create the following secrets and environment variables:
+
+| Type                | Key               | Value |
+| ------------------- | ----------------- | ----- |
+| Secret              | DUPLO_HOST        | Get [long lived token](https://docs.duplocloud.com/docs/user-administration/access-control/api-tokens#creating-a-permanent-api-token) from DuploCloud      |
+| Environment Variale | DUPLO_HOST        | DuploCloud Platform host.  Example: https://salesdemo.duplocloud.net/ |
+| Environment Variale | DUPLO_TENANT_BASE |  Name for your application in DuploCloud.  For testing use "app01"     |
+
+### Deployment Steps
+
+#### Infrastructure Pipelines - admin-tenant
+
+The first deployment step is to create the DuploCloud Tenant. To start this pipeline click on Actions, Infrastructure Pipelines, Run workflow.
+
+In the form for Module select admin-tenant, for Command select apply, and for Environment select prod then click Run workflow.
+
+Once this pipeline has completed log into Duplo and review the list of Tenants.  You will see a new Tenant with the name "$DUPLO_TENANT_BASE-$ENVIRONMENT".  So assuming you selected "app01" for DUPLO_TENANT_BASE and "dev" for Environment your tenant name would be "app01-prod".  
+
+You can repeat this step and select dev for Environment or move on to the next step. 
+
+![](./assets/run-infra-pipeline.png)
+
+#### Infrastructure Pipelines - aws-services
+
+Under the Infrastructure Piplines click Run workflow and in the form for Module select aws-services, for Command select apply, and for Environment select prod then click Run workflow.
 
 
-- DUPLO_HOST (environment variable)
-- DUPLO_TENANT_BASE (environment variable)
-- DUPLO_TOKEN (secret)
+#### Build and Publish Iamges
 
+Now that the aws-services modules under Infrastructure Pipelines is complete we can build and publish our docker images.  This step must come after aws-services because aws-services includes the required ECR Repository. 
 
-Run infra pipeline for admin-tenant apply
-Run infra pipeline for aws-servies apply
+Click on Actions, click on Build and Publish Images, click on Run workflow, leave all settings as their defaults, and click Run workflow. 
 
-Run image pipelines
+#### Infrastructure Pipelines - app
 
-Run infra pipeline for app
+Now that our docker images are published to the ECR repository it is time to deploy and configure the application.
 
-![](./assets/infra-pipeline-workflow.png)
+Under the Infrastructure Piplines click Run workflow and in the form for Module select app, for Command select apply, and for Environment select prod then click Run workflow.
 
+This step will deploy the frontend application to EKS, configure a k8s cronjob and create a Lambda function.  
 
+#### Environment Validation
 
-## Configuration
+web app
+lamba
+k8s cron
+
+## Terraform Configuration
 
 To customize the infrastructure between the different environments (dev, qa, staging, production) you can create Terraform variables file under the following path:
 
-```
-iac/terraform/$project/config/$DUPLO_TENANT_BASE-$environment/$project.tfvars
+```text
+iac/terraform/$TERRAFORM_PROJECT/config/$DUPLO_TENANT_BASE-$ENVIRONMENT/$TERRAFORM_PROJECT.tfvars
 ```
 
-$DUPLO_TENANT_BASE
-$ENVIRONMENT
-$PROJECT
+TERRAFORM_PROJECT - one of admin-tenant, aws-services, app
+DUPLO_TENANT_BASE - this is the value you set in the GitHub variables on the GitHub repostory
+ENVIRONMENT - one of dev, qa, stage, prod
 
-An example of this has been provided in `iac/terraform/aws-services/config/app01-prod/aws-services.tfvars` to increase the size of the AutoScaling group from 1 to 2. 
+An example of this has been provided in `iac/terraform/aws-services/config/app01-prod/aws-services.tfvars` to increase the size of the AutoScaling group from 1 to 2 in the prod environment.
+
+## Application Referencing Infrastructure
+
+In this project there are several examples where the application needs to know details about the infrastructure.  The following list can be used as examples when adapting this project to your own application:
+
+| Type                | Use Case          | Location |
+|---------------------|-------------------|----------|
+| k8s Secret              | The node application running in k8s needs access to RDS database credentials        |          |
+| Environment Variale | The k8s cronjob needs access to the RS Database credentials, S3 bucket name, SQS queue name, and SQS queue region |          |
+| AWS SecretsManager Secret | The Lambda function needs access to the RDS database credentials |          |
+| k8s configmap | This shows an example of an application that needs access to a data file |          |
 
 ## License
 
 See LICENSE file
-
