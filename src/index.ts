@@ -31,25 +31,29 @@ app.get('/', (req, res) => {
       </head>
       <body>
         <h1>Hello, World!</h1>
-        <p></p>
+        
+        <br></br>
+        <br></br>
+
         <p>Here are examples of reading environment variables that came from k8s secrets and the k8s secrets where created from AWS SecretsManager secrets via the k8s secret provider:</p>
         <p>DB URL: ${db_url}</p>
         <p>DB username: ${db_username}</p>
         <p>DB password: ${db_password}</p>
 
+        <br></br>
+        <br></br>
+
         <p>Here are examples of reading environment variables that came from k8s secrets where the value came from GitHub Action Secrets:</p>
         NOTE: if you do not see a value here set a GitHub Action secret key INTEGRATION_API_KEY with a random value
         <p>Integration API Key: ${integration_api_key}</p>
 
-        <p></p>
+        <br></br>
+        <br></br>
         <p>Here are examples of reading from a config map:</p>
         <p>/data/foo: ${fileContents}</p>
 
-        <p></p>
-        <p>k8s Configmap:</p>
-        <p>/data/foo: ${fileContents}</p>
-
-        <p></p>
+        <br></br>
+        <br></br>
         <p>SQS details:</p>
         <p>Queue name: ${sqs_fullname}</p>
         <p>Queue region: ${aws_region}</p>
