@@ -1,10 +1,4 @@
 
-variable "svc_frontend_docker_image" {
-  default = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${region}.amazonaws.com/${terraform.workspace}-frontend:main"
-  description = "Default docker image that will be deployed.  New versions will be pushed out via GitHub Action pipeline."
-  type    = string
-}
-
 variable "replica_count" {
   type    = number
   description = "The number of replicas to run in the k8s environment"

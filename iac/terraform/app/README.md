@@ -43,10 +43,9 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_integration_api_key"></a> [integration\_api\_key](#input\_integration\_api\_key) | n/a | `string` | `""` | no |
-| <a name="input_queue_schedule"></a> [queue\_schedule](#input\_queue\_schedule) | n/a | `string` | `"*/5 * * * *"` | no |
-| <a name="input_replica_count"></a> [replica\_count](#input\_replica\_count) | n/a | `number` | `1` | no |
-| <a name="input_svc_frontend_docker_image"></a> [svc\_frontend\_docker\_image](#input\_svc\_frontend\_docker\_image) | n/a | `string` | `"813590939111.dkr.ecr.us-west-2.amazonaws.com/frontend:main"` | no |
+| <a name="input_integration_api_key"></a> [integration\_api\_key](#input\_integration\_api\_key) | This is dummy secret that can be set via GitHub Action Secret.  Refer to the Deployment section of the README for more details. | `string` | `""` | no |
+| <a name="input_queue_schedule"></a> [queue\_schedule](#input\_queue\_schedule) | Frequency to run the k8s cronjob | `string` | `"*/5 * * * *"` | no |
+| <a name="input_replica_count"></a> [replica\_count](#input\_replica\_count) | The number of replicas to run in the k8s environment | `number` | `1` | no |
 
 ## Outputs
 

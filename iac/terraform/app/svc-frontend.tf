@@ -67,7 +67,7 @@ resource "duplocloud_duplo_service" "frontend" {
     ]
     }
   )
-  docker_image = var.svc_frontend_docker_image
+  docker_image = local.default_frontend_docker_image
   volumes = jsonencode([
     {
       "Name" : "data",
