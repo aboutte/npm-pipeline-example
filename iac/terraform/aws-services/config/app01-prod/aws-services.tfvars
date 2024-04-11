@@ -1,1 +1,0 @@
-asg_instance_count = 2
