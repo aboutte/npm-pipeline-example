@@ -26,4 +26,4 @@ jobs:
     secrets: inherit
     with:
       image: ${{ needs.image.outputs.image }}
-      environment: qa-aws
+      environment: test10
