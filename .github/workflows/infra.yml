@@ -1,4 +1,4 @@
-name: SetUp the sales demo
+name: Terraform
 
 on:
   workflow_dispatch:
