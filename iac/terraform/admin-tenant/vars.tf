@@ -4,5 +4,5 @@ variable "region" {
 }
 variable "infra_name" {
   type    = string
-  default = "prod-infra"
+  default = "nonprod01"
 }
