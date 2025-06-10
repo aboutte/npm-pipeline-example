@@ -66,8 +66,8 @@ jobs:
     - name: Checkout source code
       uses: actions/checkout@v3
 
-    - name: Duplo and AWS Setup
-      uses: duplocloud/actions/setup@main
+    - name: Setup
+      uses: duplocloud/actions@main
     
     - name: Terraform Setup
       uses: duplocloud/actions/setup-terraform@main
