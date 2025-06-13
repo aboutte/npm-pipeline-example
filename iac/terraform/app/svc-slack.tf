@@ -5,7 +5,7 @@ resource "duplocloud_duplo_service" "slack" {
   lb_synced_deployment                 = false
   cloud_creds_from_k8s_service_account = false
   is_daemonset                         = false
-  is_unique_k8s_node_required = true
+  is_unique_k8s_node_required          = true
   agent_platform                       = 7
   cloud                                = 0
   other_docker_config = jsonencode({
@@ -70,10 +70,10 @@ resource "duplocloud_duplo_service" "slack" {
         "Name" : "SLACK_ALLOWED_CHANNEL_IDS", # in ask-dev pass in allowed channel IDs, ask-prod is set to "" which allows it to be used in all channels
         "Value" : "${join(", ", terraform.workspace == "ask-dev" ? var.slackbot_allowed_channel_ids : [""])}"
       }
-      
+
     ]
     }
-  )  
+  )
   docker_image = var.svc_slack_docker_image
 
   lifecycle {

@@ -5,7 +5,7 @@ resource "duplocloud_duplo_service" "frontend" {
   lb_synced_deployment                 = false
   cloud_creds_from_k8s_service_account = false
   is_daemonset                         = false
-  is_unique_k8s_node_required = true
+  is_unique_k8s_node_required          = true
   agent_platform                       = 7
   cloud                                = 0
   other_docker_config = jsonencode({

@@ -20,7 +20,7 @@ variable "svc_queue_docker_image" {
 }
 
 variable "replica_count" {
-  type = number
+  type    = number
   default = 1
 }
 
@@ -35,14 +35,14 @@ variable "base_domain" {
 }
 
 variable "openai_api_key" {
-  default = ""
-  type    = string
+  default   = ""
+  type      = string
   sensitive = true
 }
 
 variable "duplo_token" {
-  default = ""
-  type    = string
+  default   = ""
+  type      = string
   sensitive = true
 }
 
@@ -57,26 +57,26 @@ variable "duplo_native_context" {
 }
 
 variable "nonprod_slack_bot_token" {
-  default = ""
-  type    = string
+  default   = ""
+  type      = string
   sensitive = true
 }
 
 variable "nonprod_slack_signing_secret" {
-  default = ""
-  type    = string
+  default   = ""
+  type      = string
   sensitive = true
 }
 
 variable "prod_slack_bot_token" {
-  default = ""
-  type    = string
+  default   = ""
+  type      = string
   sensitive = true
 }
 
 variable "prod_slack_signing_secret" {
-  default = ""
-  type    = string
+  default   = ""
+  type      = string
   sensitive = true
 }
 
@@ -86,14 +86,14 @@ variable "prod_containerized" {
 }
 
 variable "clickup_api_key" {
-  default = ""
-  type    = string
+  default   = ""
+  type      = string
   sensitive = true
 }
 
 variable "prod_clickup_list_id" {
-  default = "901301536541"
-  type    = string
+  default   = "901301536541"
+  type      = string
   sensitive = true
 }
 
@@ -110,33 +110,33 @@ variable "slackbot_allowed_member_ids" {
     "U05HFPMLD4Y", # Brian Rawlins
     "U03ALJH7HNC", # Raghavan
     "U063T1RE8KX", # Cory May
-    "U06423XQMSM" # Luke Baker
+    "U06423XQMSM"  # Luke Baker
   ]
-  type    = list
+  type = list(any)
 }
 
 variable "slackbot_allowed_channel_ids" {
   default = [
     "C06AG8BPM0E" # ask-dev slack channel
   ]
-  type    = list
+  type = list(any)
 }
 
 variable "nonprod_pinecone_api_key" {
-  default = ""
-  type    = string
+  default   = ""
+  type      = string
   sensitive = true
 }
 
 variable "prod_pinecone_api_key" {
-  default = ""
-  type    = string
+  default   = ""
+  type      = string
   sensitive = true
 }
 
 variable "enable_scheduler" {
-  type        = bool
-  default     = false # default to false because we will only run this in prod
+  type    = bool
+  default = false # default to false because we will only run this in prod
 }
 
 variable "scheduler_tenants" {

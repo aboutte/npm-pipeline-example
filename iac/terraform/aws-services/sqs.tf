@@ -1,18 +1,18 @@
 
 resource "duplocloud_aws_sqs_queue" "sqs_queue" {
-  tenant_id                   = local.tenant_id
-  name                        = "database-updates"
-  fifo_queue                  = false
-  message_retention_seconds   = 345600
-  visibility_timeout_seconds  = 30
-} 
+  tenant_id                  = local.tenant_id
+  name                       = "database-updates"
+  fifo_queue                 = false
+  message_retention_seconds  = 345600
+  visibility_timeout_seconds = 30
+}
 
 data "aws_iam_policy_document" "queue" {
   statement {
     sid       = "example-statement-ID"
     effect    = "Allow"
     resources = [duplocloud_aws_sqs_queue.sqs_queue.arn]
-    actions   = ["SQS:SendMessage" ]
+    actions   = ["SQS:SendMessage"]
 
     condition {
       test     = "ArnLike"
@@ -40,13 +40,13 @@ resource "aws_sqs_queue_policy" "policy" {
 
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
-  
-  depends_on = [ aws_sqs_queue_policy.policy ]
+
+  depends_on = [aws_sqs_queue_policy.policy]
 
   bucket = duplocloud_s3_bucket.search.fullname
 
   queue {
-    id = "sqs"
+    id            = "sqs"
     queue_arn     = duplocloud_aws_sqs_queue.sqs_queue.arn
     events        = ["s3:ObjectCreated:*", "s3:ObjectRemoved:*"]
     filter_prefix = "source_documents/"

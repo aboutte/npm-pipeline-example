@@ -9,10 +9,10 @@ resource "duplocloud_k8s_cron_job" "queue" {
   spec {
     job_template {
       spec {
-        parallelism = var.parallelism
-        completions = var.completions
-        backoff_limit = var.backoff_limit
-        active_deadline_seconds = var.active_deadline_seconds
+        parallelism                = var.parallelism
+        completions                = var.completions
+        backoff_limit              = var.backoff_limit
+        active_deadline_seconds    = var.active_deadline_seconds
         ttl_seconds_after_finished = var.ttl_seconds_after_finished
         template {
           spec {
@@ -21,7 +21,7 @@ resource "duplocloud_k8s_cron_job" "queue" {
               name              = "scheduler"
               image             = var.svc_queue_docker_image
               image_pull_policy = "Always"
-              
+
               env {
                 name  = "CONTAINER_ROLE"
                 value = "queue"
@@ -53,21 +53,21 @@ resource "duplocloud_k8s_cron_job" "queue" {
                 value = data.terraform_remote_state.aws-services.outputs["s3_search_fullname"]
               }
               env {
-                name  = "PINECONE_API_KEY"
+                name = "PINECONE_API_KEY"
                 value_from {
-                    secret_key_ref {
-                        key = "PINECONE_API_KEY"
-                        name = "pinecone"
-                    }
+                  secret_key_ref {
+                    key  = "PINECONE_API_KEY"
+                    name = "pinecone"
+                  }
                 }
               }
               env {
-                name  = "OPENAI_API_KEY"
+                name = "OPENAI_API_KEY"
                 value_from {
-                    secret_key_ref {
-                        key = "OPENAI_API_KEY"
-                        name = "openai"
-                    }
+                  secret_key_ref {
+                    key  = "OPENAI_API_KEY"
+                    name = "openai"
+                  }
                 }
               }
               env {
@@ -90,7 +90,7 @@ resource "duplocloud_k8s_cron_job" "queue" {
     concurrency_policy            = var.concurrency_policy
     failed_jobs_history_limit     = var.failed_jobs_history_limit
     successful_jobs_history_limit = var.successful_jobs_history_limit
-    starting_deadline_seconds = var.starting_deadline_seconds
+    starting_deadline_seconds     = var.starting_deadline_seconds
   }
   lifecycle {
     ignore_changes = [

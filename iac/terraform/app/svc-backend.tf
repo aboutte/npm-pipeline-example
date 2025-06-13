@@ -5,11 +5,11 @@ resource "duplocloud_duplo_service" "backend" {
   lb_synced_deployment                 = false
   cloud_creds_from_k8s_service_account = false
   is_daemonset                         = false
-  is_unique_k8s_node_required = true
+  is_unique_k8s_node_required          = true
   agent_platform                       = 7
   cloud                                = 0
   other_docker_config = jsonencode({
-   "Env" : [
+    "Env" : [
       {
         "name" : "OPENAI_API_KEY",
         "valueFrom" : {
@@ -103,7 +103,7 @@ resource "duplocloud_duplo_service" "backend" {
       },
       "initialDelaySeconds" : 60,
       "periodSeconds" : 10,
-      "failureThreshold" : 25      
+      "failureThreshold" : 25
     },
     "ReadinessProbe" : {
       "httpGet" : {
@@ -111,7 +111,7 @@ resource "duplocloud_duplo_service" "backend" {
         "port" : 5000
       },
       "periodSeconds" : 5,
-      "failureThreshold": 2
+      "failureThreshold" : 2
     },
     "LivenessProbe" : {
       "httpGet" : {
@@ -119,7 +119,7 @@ resource "duplocloud_duplo_service" "backend" {
         "port" : 5000
       },
       "periodSeconds" : 5,
-      "failureThreshold": 2
+      "failureThreshold" : 2
     },
 
     # "PodSecurityContext" : {

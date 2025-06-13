@@ -1,13 +1,13 @@
 
 resource "duplocloud_aws_load_balancer" "askduplo_dev" {
-  tenant_id            = local.tenant_id
-  name                 = "search"
-  load_balancer_type   = "application"
-  enable_access_logs   = false
-  is_internal          = false
-  drop_invalid_headers = false
+  tenant_id              = local.tenant_id
+  name                   = "search"
+  load_balancer_type     = "application"
+  enable_access_logs     = false
+  is_internal            = false
+  drop_invalid_headers   = false
   http_to_https_redirect = true
-  idle_timeout         = 60
+  idle_timeout           = 60
 }
 
 resource "duplocloud_aws_load_balancer_listener" "askduplo_dev_listener_443" {

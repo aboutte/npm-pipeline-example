@@ -6,14 +6,14 @@ data "duplocloud_tenant_aws_region" "current" {
 }
 
 locals {
-  tfstate_bucket = "duplo-tfstate-${data.aws_caller_identity.current.account_id}"
-  region         = data.duplocloud_tenant_aws_region.current.aws_region
-  tenant_id      = data.terraform_remote_state.tenant.outputs["tenant_id"]
-  cert_arn       = data.terraform_remote_state.tenant.outputs["cert_arn"]
-  tenant_name    = data.terraform_remote_state.tenant.outputs["tenant_name"]
-  sqs_queue_url = data.terraform_remote_state.aws-services.outputs["sqs_queue_url"]
+  tfstate_bucket     = "duplo-tfstate-${data.aws_caller_identity.current.account_id}"
+  region             = data.duplocloud_tenant_aws_region.current.aws_region
+  tenant_id          = data.terraform_remote_state.tenant.outputs["tenant_id"]
+  cert_arn           = data.terraform_remote_state.tenant.outputs["cert_arn"]
+  tenant_name        = data.terraform_remote_state.tenant.outputs["tenant_name"]
+  sqs_queue_url      = data.terraform_remote_state.aws-services.outputs["sqs_queue_url"]
   sqs_queue_fullname = data.terraform_remote_state.aws-services.outputs["sqs_queue_fullname"]
-  sqs_queue_arn = data.terraform_remote_state.aws-services.outputs["sqs_queue_arn"]
+  sqs_queue_arn      = data.terraform_remote_state.aws-services.outputs["sqs_queue_arn"]
 }
 
 data "terraform_remote_state" "tenant" {
