@@ -62,28 +62,20 @@ jobs:
         EOF
         )
         
-        # Send notification to Duplo service
-        curl "${{ env.DUPLO_HOST }}proxy/ai-studio/v1/aiservicedesk/tickets/8be0e053-72cc-4cdc-916d-d7328927156c" \
-          -H 'accept: application/json, text/plain, */*' \
-          -H 'accept-language: en-US,en;q=0.9' \
-          -H "authorization: Bearer ${{ env.DUPLO_TOKEN }}" \
-          -H 'cache-control: no-cache' \
-          -H 'content-type: application/json; charset=UTF-8' \
-          -H "origin: ${{ env.DUPLO_HOST }}" \
-          -H 'pragma: no-cache' \
-          -H 'priority: u=1, i' \
-          -H 'sec-ch-ua: "Google Chrome";v="137", "Chromium";v="137", "Not/A)Brand";v="24"' \
-          -H 'sec-ch-ua-mobile: ?0' \
-          -H 'sec-ch-ua-platform: "macOS"' \
-          -H 'sec-fetch-dest: empty' \
-          -H 'sec-fetch-mode: cors' \
-          -H 'sec-fetch-site: same-origin' \
-          -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36' \
-          --data-raw "{\"title\":\"You are running in the context of a pipeline.  a phase of the pipeline has failed and the output is below.  I want you take take this output and give me a summary of the issue and suggest a kubectl command to help troubleshoot the issue\\n\\n\n\nBELOW IS THE OUTPUT FROM THE PIPELINE:\n\n$PIPELINE_OUTPUT\",\"assignee\":{\"agentName\":\"k8s\",\"instanceId\":\"k8s\",\"agentHostTenantId\":\"ea73f43c-dda3-4fb5-998d-54f262238225\"}}"
-
-
-    # - name: Update Service
-    #   uses: duplocloud/actions/update-service@main
-    #   with:
-    #     service: demo
-    #     image: ${{ inputs.image }}
+        curl "https://test10.duplocloud.net/proxy/ai-studio/v1/aiservicedesk/tickets/8be0e053-72cc-4cdc-916d-d7328927156c" \
+        -H 'accept: application/json, text/plain, */*' \
+        -H 'accept-language: en-US,en;q=0.9' \
+        -H "authorization: Bearer ${{ env.DUPLO_TOKEN }}" \
+        -H 'cache-control: no-cache' \
+        -H 'content-type: application/json; charset=UTF-8' \
+        -H "origin: test10.duplocloud.net" \
+        -H 'pragma: no-cache' \
+        -H 'priority: u=1, i' \
+        -H 'sec-ch-ua: "Google Chrome";v="137", "Chromium";v="137", "Not/A)Brand";v="24"' \
+        -H 'sec-ch-ua-mobile: ?0' \
+        -H 'sec-ch-ua-platform: "macOS"' \
+        -H 'sec-fetch-dest: empty' \
+        -H 'sec-fetch-mode: cors' \
+        -H 'sec-fetch-site: same-origin' \
+        -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36' \
+        --data-raw "{\"title\":\"You are running in the context of a pipeline.  a phase of the pipeline has failed and the output is below.  I want you take take this output and give me a summary of the issue and suggest a kubectl command to help troubleshoot the issue\\n\\n\n\nBELOW IS THE OUTPUT FROM THE PIPELINE:\n\n$PIPELINE_OUTPUT\",\"assignee\":{\"agentName\":\"k8s\",\"instanceId\":\"k8s\",\"agentHostTenantId\":\"ea73f43c-dda3-4fb5-998d-54f262238225\"}}"
