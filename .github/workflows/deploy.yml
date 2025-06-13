@@ -63,7 +63,7 @@ jobs:
         )
         
         # Send notification to Duplo service
-        curl "${{ env.DUPLO_HOST }}/proxy/ai-studio/v1/aiservicedesk/tickets/8be0e053-72cc-4cdc-916d-d7328927156c" \
+        curl "${{ env.DUPLO_HOST }}proxy/ai-studio/v1/aiservicedesk/tickets/8be0e053-72cc-4cdc-916d-d7328927156c" \
           -H 'accept: application/json, text/plain, */*' \
           -H 'accept-language: en-US,en;q=0.9' \
           -H "authorization: Bearer ${{ env.DUPLO_TOKEN }}" \
